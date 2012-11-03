@@ -5,6 +5,7 @@
     (html5
           [:head
                  [:title "Hello World"]
-                 (include-css "/css/style.css")]
+                 (include-css "/css/style.css")
+                 (include-js  "/js/geolocation.js")]
           [:body
                  [:h1 "Hello World"]]))
