@@ -4,10 +4,13 @@
          [hiccup.middleware :only (wrap-base-url)])
     (:require [compojure.route :as route]
               [compojure.handler :as handler]
-              [compojure.response :as response]))
+              [compojure.response :as response]
+              [wheelcrowd.location.foursquare :as foursquare]))
 
 (defroutes main-routes
              (GET "/" [] (index-page))
+             (GET "/venues" [lat lon]
+                  (venues-page (foursquare/search lat lon foursquare/config)))
              (route/resources "/")
              (route/not-found "Page not found"))
 
