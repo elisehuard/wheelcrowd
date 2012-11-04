@@ -6,3 +6,4 @@
 /.lein-*
 /checkouts
 /.lein-deps-sum
+run.sh

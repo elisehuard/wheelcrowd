@@ -2,9 +2,9 @@
   (:require [clj-http.client :as client])
   (:require [clojure.data.json :as json]))
 
-(def foursquare-config
-  {'client-id "2R5BMXPAADPLBIXDVLTP5N0BFBA3JWR4RZUKSLG5XCHIU2CQ"
-   'client-secret "XAUOLWJPRZNFR2OXYBGUI3RAKS3RIEH0HLAVEQ1WRD3MIDY4"})
+(def config
+  {'client-id (get (System/getenv) "FOURSQUARE_CLIENT_ID")
+   'client-secret (get (System/getenv) "FOURSQUARE_CLIENT_SECRET")})
 
 (defn search-request[lat lon foursquare-config]
   (str "https://api.foursquare.com/v2/venues/search?"
