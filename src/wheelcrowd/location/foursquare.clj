@@ -22,8 +22,9 @@
 (defn relevant-details[location-json]
   {:id   (location-json "id")
    :name (location-json "name")
-   :categories (map (fn[x] (x "name")) (location-json "categories")) }
-)
+   :distance ((location-json "location") "distance")
+   :categories (map (fn[x] (x "name")) (location-json "categories")) })
 
 (defn search[lat lon foursquare-config]
-   (map relevant-details (get-items (search-call lat lon foursquare-config))))
+  (sort-by :distance <
+    (map relevant-details (get-items (search-call lat lon foursquare-config)))))

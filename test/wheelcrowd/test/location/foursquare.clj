@@ -15,4 +15,5 @@
   (let [details (relevant-details single-location)]
     (is (= (details :id) "4e2442cdd4c0d325910996f3"))
     (is (= (details :name) "Anussage building"))
+    (is (= (details :distance) 276)) 
     (is (= (details :categories) []))))

@@ -16,7 +16,7 @@
 
 (defn single-venue [location]
   [:div#location 
-   [:div {:data-id (location :id) } (location :name)]])
+   [:div {:data-id (location :id) } (str (location :name) " " (location :distance) "m")]])
 
 (defn venues-page [locations]
   (layout (map single-venue locations)))
