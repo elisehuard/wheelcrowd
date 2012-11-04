@@ -9,7 +9,7 @@
 
 (deftest search-test
   (with-redefs [search-call (fn[a b c] foursquare-response)]
-    (is (= (count (search 51.533599 -0.0937594 foursquare-config)) 30))))
+    (is (= (count (search 51.533599 -0.0937594 config)) 30))))
 
 (deftest relevant-details-test
   (let [details (relevant-details single-location)]
