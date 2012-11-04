@@ -1,11 +1,22 @@
 (ns wheelcrowd.views
-    (:use [hiccup core page]))
+  (:use [hiccup core page]))
+
+(defn layout [body]
+  (html5
+    [:head
+      [:title "Wheelcrowd"]
+        (include-css "/css/style.css")
+        (include-js  "/js/geolocation.js")]
+      [:body
+        [:h1 "Wheelcrowd"]
+        body]))
 
 (defn index-page []
-    (html5
-          [:head
-                 [:title "Hello World"]
-                 (include-css "/css/style.css")
-                 (include-js  "/js/geolocation.js")]
-          [:body
-                 [:h1 "Hello World"]]))
+  (layout [:a {:href "/venues"} "explore"]))
+
+(defn single-venue [location]
+  [:div#location 
+   [:div {:data-id (location :id) } (location :name)]])
+
+(defn venues-page [locations]
+  (layout (map single-venue locations)))
