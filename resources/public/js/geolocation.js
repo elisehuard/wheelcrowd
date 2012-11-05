@@ -9,9 +9,10 @@ wheelcrowd.geoLocation = function() {
   };
 
   var getPosition = function(position) {
-    // http call to transmit position to server
     var latitude  = position.coords.latitude;
     var longitude = position.coords.longitude;
+    var explore = document.getElementById("explore");
+    explore.setAttribute('href', "/venues?lat=" + latitude + "&lon=" + longitude);
     console.log(latitude, longitude);
   }
 
