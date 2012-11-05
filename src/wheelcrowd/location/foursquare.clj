@@ -26,7 +26,8 @@
   {:id   (location-json "id")
    :name (location-json "name")
    :distance ((location-json "location") "distance")
-   :categories (map (fn[x] (x "name")) (location-json "categories")) })
+   :categories (map (fn[x] (x "name")) (location-json "categories"))
+   :tip-count ((location-json "stats") "tipCount") })
 
 (defn search[lat lon foursquare-config]
   (sort-by :distance <
@@ -43,11 +44,20 @@
 (defn tips-get-items[json]
   (((json "response") "tips") "items"))
 
-(defn tip-accessible[tip]
-  (let [text (tip "text")]
-    (cond (re-find #"#accessfail" text) false
-          (re-find #"#accesspass" text) true
-          :else nil)))
+(defn tip-accessible[text]
+  (cond (re-find #"(#accessfail|#af)" text) false
+        (re-find #"(#accesspass|#ap)" text) true
+        :else nil))
+
+(defn tip-information[tip]
+  {:text (tip "text")
+   :accessible (tip-accessible (tip "text"))
+   :created (tip "createdAt")})
+
+
+(defn tips-conclusion[tips]
+  (first
+     (sort-by :created > (filter (fn[x] (not (= (x :accessible) nil))) tips))))
 
 (defn tips[id config]
-   (map tip-accessible (tips-get-items (tips-call id config))))
+   (tips-conclusion (tips-get-items (tips-call id config))))

@@ -16,16 +16,25 @@
     (is (= (details :id) "4e2442cdd4c0d325910996f3"))
     (is (= (details :name) "Anussage building"))
     (is (= (details :distance) 276)) 
-    (is (= (details :categories) []))))
+    (is (= (details :categories) []))
+    (is (= (details :tip-count) 0))))
 
 (deftest tips-request-test
   (is (= (tips-request "ABCDEF" {:client-id "ABC" :client-secret "DEF"})
          "https://api.foursquare.com/v2/venues/ABCDEF/tips?client_id=ABC&client_secret=DEF")))
 
 (deftest tip-accessible-test
-  (is (= (tip-accessible {"text" "great place #accesspass"}) true))
-  (is (= (tip-accessible {"text" "boo hiss #accessfail"}) false))
-  (is (= (tip-accessible {"text" "nice coffee, bad service"}) nil)))
+  (is (= (tip-accessible "great place #accesspass") true))
+  (is (= (tip-accessible "boo hiss #accessfail") false))
+  (is (= (tip-accessible "nice coffee, bad service") nil)))
 
 (deftest tips-test
-  (is (= (count (tips "4ace6a86f964a52072d020e3" config)) 12)))
+  (with-redefs [search-call (fn[a b] tips-response)]
+    (is (= (tips "4ace6a86f964a52072d020e3" config) nil))))
+
+(deftest tips-conclusion-test
+  (is (= (tips-conclusion [{:created 123 :accessible true}]) {:created 123 :accessible true}))
+  (is (= (tips-conclusion [{:created 123 :accessible false}]) {:created 123 :accessible false}))
+  (is (= (tips-conclusion [{:created 123 :accessible false},{:created 456 :accessible nil}]) {:created 123 :accessible false}))
+  (is (= (tips-conclusion [{:created 123 :accessible false},{:created 456 :accessible true}]) {:created 456 :accessible true})))
+
