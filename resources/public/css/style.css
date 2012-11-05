@@ -1,0 +1,66 @@
+body {
+}
+
+.header {
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+  margin: 5px;
+}
+
+.location {
+  -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
+  -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
+  padding: 10px;
+  margin: 5px 10px;
+  background-color: #999;
+  border-radius: 5px 10px;
+}
+
+.location a {
+  text-decoration: none;
+}
+
+ol {
+  text-align: center;
+}
+
+a.button {
+  margin-top:       10.5px;
+  width:            264px;
+  display:          inline-block;
+  padding:          1px;
+  border-radius:    12px;
+  background-color: #454850;
+  box-shadow:       inset 0 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+a.button > button {
+  color:            #111111;
+  padding:          6px 0 6px 0;
+  width:            99%;
+  text-align:       center;
+  text-shadow:      0 1px 1px white;
+  border:           0;
+  box-shadow:       0 0 2px rgba(0, 0, 0, 0.5);
+  border-radius:    10px;
+  border-top:       1px solid rgba(255, 255, 255, 0.5);
+  border-bottom:    1px solid rgba(0, 0, 0, 0.75);
+  font-size:        20px;
+  font-weight:      bold;
+  font-family:      "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  background:       #e2e2e2;
+  background:       -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e2e2e2), color-stop(50%, #dbdbdb), color-stop(51%, #d1d1d1), color-stop(100%, #fefefe));
+  background:       -webkit-linear-gradient(top, #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%);
+  background:       linear-gradient(top, #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%);
+}
+
+.name {
+  color: white;
+  display: block;
+}
