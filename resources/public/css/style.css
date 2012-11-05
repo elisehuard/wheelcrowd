@@ -4,6 +4,10 @@ body {
 .header {
 }
 
+.footer {
+  text-align: center;
+}
+
 h1 {
   font-weight: bold;
   font-size: 2em;

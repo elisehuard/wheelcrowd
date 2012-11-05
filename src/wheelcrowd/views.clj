@@ -12,7 +12,8 @@
       [:body
         [:div.header
           [:h1 "Wheelcrowd"]]
-        body]))
+        body
+        [:div.footer "Data from Foursquare"]]))
 
 (defn index-page []
   (layout 
