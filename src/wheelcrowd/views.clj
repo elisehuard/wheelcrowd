@@ -22,11 +22,15 @@
         [:a {:class "button" :id "explore"}
             [:button.native {:name "sync" :type "input"} "Explore"]]]]))
 
+(defn accessibility[value]
+   ({true "accessible", false "non-accessible", nil "Unknown"} value))
+
 (defn single-venue [location]
   [:div.location
    [:div {:data-id (location :id) }
      [:a {:href (str "http://foursquare.com/v/" (location :id)) } [:span.name (location :name)]]
-     [:span (str (location :distance) "m")]]])
+     [:span (str (location :distance) "m")]
+     [:span (accessibility (location :accessible))]]])
 
 (defn venues-page [locations]
-  (layout (map single-venue locations)))
+ (layout (map single-venue locations)))

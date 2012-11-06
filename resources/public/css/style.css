@@ -29,6 +29,10 @@ h1 {
   text-decoration: none;
 }
 
+.location span {
+  padding: 5px;
+}
+
 ol {
   text-align: center;
 }
