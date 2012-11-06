@@ -28,13 +28,13 @@
   (is (= (tip-accessible "boo hiss #accessfail") false))
   (is (= (tip-accessible "nice coffee, bad service") nil)))
 
-(deftest tips-test
-  (with-redefs [search-call (fn[a b] tips-response)]
-    (is (= (tips "4ace6a86f964a52072d020e3" config) nil))))
+(deftest tips-accessible-test
+  (with-redefs [tips-call (fn[a b] tips-response)]
+    (is (= (tips-accessible? "4ace6a86f964a52072d020e3" config) nil))))
 
 (deftest tips-conclusion-test
-  (is (= (tips-conclusion [{:created 123 :accessible true}]) {:created 123 :accessible true}))
-  (is (= (tips-conclusion [{:created 123 :accessible false}]) {:created 123 :accessible false}))
-  (is (= (tips-conclusion [{:created 123 :accessible false},{:created 456 :accessible nil}]) {:created 123 :accessible false}))
-  (is (= (tips-conclusion [{:created 123 :accessible false},{:created 456 :accessible true}]) {:created 456 :accessible true})))
+  (is (= (tips-conclusion [{:created 123 :accessible true}])  true))
+  (is (= (tips-conclusion [{:created 123 :accessible false}]) false))
+  (is (= (tips-conclusion [{:created 123 :accessible false},{:created 456 :accessible nil}]) false))
+  (is (= (tips-conclusion [{:created 123 :accessible false},{:created 456 :accessible true}]) true)))
 

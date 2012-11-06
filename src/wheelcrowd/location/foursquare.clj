@@ -41,9 +41,6 @@
   (let [response (client/get (tips-request id config))]
     (json/read-str (response :body))))
 
-(defn tips-get-items[json]
-  (((json "response") "tips") "items"))
-
 (defn tip-accessible[text]
   (cond (re-find #"(#accessfail|#af)" text) false
         (re-find #"(#accesspass|#ap)" text) true
@@ -54,10 +51,14 @@
    :accessible (tip-accessible (tip "text"))
    :created (tip "createdAt")})
 
+(defn tips-get-items[json]
+  (map tip-information (((json "response") "tips") "items")))
 
 (defn tips-conclusion[tips]
-  (first
-     (sort-by :created > (filter (fn[x] (not (= (x :accessible) nil))) tips))))
+  (let [relevant-tip  (first (sort-by :created > (filter (fn[x] (not (= (x :accessible) nil))) tips)))]
+    (if (nil? relevant-tip)
+      nil
+      (relevant-tip :accessible))))
 
-(defn tips[id config]
+(defn tips-accessible?[id config]
    (tips-conclusion (tips-get-items (tips-call id config))))
