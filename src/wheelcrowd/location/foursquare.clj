@@ -28,7 +28,7 @@
 (defn venue-relevant-details[location-json]
   {:id   (location-json "id")
    :name (location-json "name")
-   :distance (when (location-json "location") ((location-json "location") "distance"))
+   :distance (if (nil? (location-json "location")) nil ((location-json "location") "distance"))
    :categories (map (fn[x] (x "name")) (location-json "categories"))
    :tip-count ((location-json "stats") "tipCount") })
 
