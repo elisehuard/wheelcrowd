@@ -25,16 +25,16 @@
 (defn get-items[json]
    ((first ((json "response") "groups")) "items"))
 
-(defn search-relevant-details[location-json]
+(defn venue-relevant-details[location-json]
   {:id   (location-json "id")
    :name (location-json "name")
-   :distance ((location-json "location") "distance")
+   :distance (when (location-json "location") ((location-json "location") "distance"))
    :categories (map (fn[x] (x "name")) (location-json "categories"))
    :tip-count ((location-json "stats") "tipCount") })
 
 (defn search[lat lon foursquare-config]
   (sort-by :distance <
-    (map search-relevant-details (get-items (search-call lat lon foursquare-config)))))
+    (map venue-relevant-details (get-items (search-call lat lon foursquare-config)))))
 
 (defn tips-request[id config]
   (str "https://api.foursquare.com/v2/venues/" id "/tips?"

@@ -12,7 +12,7 @@
     (is (= (count (search 51.533599 -0.0937594 config)) 30))))
 
 (deftest relevant-details-test
-  (let [details (search-relevant-details single-location)]
+  (let [details (venue-relevant-details single-location)]
     (is (= (details :id) "4e2442cdd4c0d325910996f3"))
     (is (= (details :name) "Anussage building"))
     (is (= (details :distance) 276)) 
