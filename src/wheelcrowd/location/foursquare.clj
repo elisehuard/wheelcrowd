@@ -10,14 +10,17 @@
   (str "client_id="      (config :client-id) 
        "&client_secret=" (config :client-secret)))
 
+(defn api-call[request]
+  (let [response (client/get request)]
+    (json/read-str (response :body))))
+
 (defn search-request[lat lon foursquare-config]
   (str "https://api.foursquare.com/v2/venues/search?"
        "ll=" lat "," lon "&"
        (auth-params foursquare-config)))
 
 (defn search-call[lat lon foursquare-config]
-  (let [response (client/get (search-request lat lon foursquare-config))]
-    (json/read-str (response :body))))
+  (api-call (search-request lat lon foursquare-config)))
 
 (defn get-items[json]
    ((first ((json "response") "groups")) "items"))
@@ -38,8 +41,7 @@
        (auth-params config)))
 
 (defn tips-call[id config]
-  (let [response (client/get (tips-request id config))]
-    (json/read-str (response :body))))
+  (api-call (tips-request id config)))
 
 (defn tip-accessible[text]
   (cond (re-find #"(#accessfail|#af)" text) false
