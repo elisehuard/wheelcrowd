@@ -28,9 +28,12 @@
 (defn single-venue [location]
   [:div.location
    [:div {:data-id (location :id) }
-     [:a {:href (str "http://foursquare.com/v/" (location :id)) } [:span.name (location :name)]]
+     [:a {:href (str "/venue/" (location :id)) } [:span.name (location :name)]]
      [:span (str (location :distance) "m")]
      [:span (str "Accessible: " (accessibility (location :accessible)))]]])
 
 (defn venues-page [locations]
- (layout (map single-venue locations)))
+  (layout (map single-venue locations)))
+
+(defn venue-page [location]
+  (layout (single-venue location))) 

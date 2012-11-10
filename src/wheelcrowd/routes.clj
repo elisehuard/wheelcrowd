@@ -12,6 +12,8 @@
              (GET "/" [] (index-page))
              (GET "/venues" [lat lon]
                 (venues-page (location/venues lat lon foursquare/config)))
+             (GET "/venue/:id" [id]
+                (venue-page (location/venue id foursquare/config)))
              (route/resources "/")
              (route/not-found "Page not found"))
 

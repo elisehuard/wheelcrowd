@@ -64,3 +64,18 @@
 
 (defn tips-accessible?[id config]
    (tips-conclusion (tips-get-items (tips-call id config))))
+
+(defn venue-request[id foursquare-config]
+  (str "https://api.foursquare.com/v2/venues/"
+       id "?"
+       (auth-params foursquare-config)))
+
+(defn venue-call [id config]
+  (api-call (venue-request id config)))
+
+(defn venue-response [json]
+  ((json "response") "venue"))
+
+(defn venue [id config]
+  (venue-relevant-details 
+    (venue-response (venue-call id config))))
