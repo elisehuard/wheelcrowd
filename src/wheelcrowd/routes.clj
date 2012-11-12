@@ -15,6 +15,12 @@
                 (venues-page (location/venues lat lon foursquare/config)))
              (GET "/venue/:id" [id]
                 (venue-page (location/venue id foursquare/config)))
+             (POST "/venue/:id/accessible" [id venue-name]
+                (location/make-accessible id venue-name)
+                (redirect (str "/venue/" id)))
+             (POST "/venue/:id/not-accessible" [id venue-name]
+                (location/make-inaccessible id venue-name)
+                (redirect (str "/venue/" id)))
              (route/resources "/")
              (route/not-found "Page not found"))
 

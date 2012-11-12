@@ -3,7 +3,7 @@
    (:require [wheelcrowd.models.rating :as rating]))
 
 (defn accessible-venue[venue]
-  (let [rating (rating/retrieve (venue :foursquare-id))]
+  (let [rating (rating/retrieve (venue :id))]
     (cond (not (nil? rating))      (assoc venue :accessible (rating :accessible))
           (> (venue :tip-count) 0) (assoc venue :accessible (foursquare/tips-accessible? (venue :id) foursquare/config))
           :else                    (assoc venue :accessible nil))))
@@ -14,3 +14,9 @@
 
 (defn venue [id config]
    (accessible-venue (foursquare/venue id config)))
+
+(defn make-accessible[id venue-name]
+  (rating/make-accessible id venue-name))
+
+(defn make-inaccessible[id venue-name]
+  (rating/make-inaccessible id venue-name))
