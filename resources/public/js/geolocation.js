@@ -12,8 +12,9 @@ wheelcrowd.geoLocation = function() {
     var latitude  = position.coords.latitude;
     var longitude = position.coords.longitude;
     var explore = document.getElementById("explore");
-    explore.setAttribute('href', "/venues?lat=" + latitude + "&lon=" + longitude);
-    console.log(latitude, longitude);
+    if (explore) {
+      explore.setAttribute('href', "/venues?lat=" + latitude + "&lon=" + longitude);
+    }
   }
 
   return {
