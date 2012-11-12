@@ -4,6 +4,7 @@
                  [org.clojure/data.json "0.2.1"]
                  [org.clojure/java.jdbc "0.2.3"]
                  [postgresql/postgresql "9.1-901.jdbc4"]
+                 [ring "1.1.6"]
                  [compojure "1.1.3"]
                  [clj-http "0.5.7"]
                  [hiccup "1.0.1"]]

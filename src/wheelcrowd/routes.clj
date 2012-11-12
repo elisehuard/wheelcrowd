@@ -1,7 +1,8 @@
 (ns wheelcrowd.routes
     (:use compojure.core
           wheelcrowd.views
-         [hiccup.middleware :only (wrap-base-url)])
+         [hiccup.middleware :only (wrap-base-url)]
+         [ring.util.response :only (redirect)])
     (:require [compojure.route :as route]
               [compojure.handler :as handler]
               [compojure.response :as response]
