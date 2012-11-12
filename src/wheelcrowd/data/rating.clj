@@ -11,3 +11,21 @@
   (sql/with-connection (System/getenv "DATABASE_URL")
     (sql/insert-values :rating [:foursquare_id :name :accessible]
                                [(data :foursquare-id) (data :name) (data :accessible)])))
+
+(defn update-rating
+  "This method updates a rating"
+  [id attribute-map]
+  (try
+    (sql/with-connection (System/getenv "DATABASE_URL")
+      (sql/update-values
+        :rating
+        ["foursquare_id=?" id]
+        attribute-map))
+     (catch Exception e (.printStackTrace (.getNextException e)))))
+
+
+(defn find-or-update-rating[id venue-name accessible]
+  (let [rating (get-rating id)]
+    (if (empty? rating)
+      (new-rating {:foursquare-id id :name venue-name :accessible accessible})
+      (update-rating id {:accessible accessible})))) 
