@@ -1,28 +1,26 @@
 (ns wheelcrowd.data.rating
-  (:use    [wheelcrowd.data.configuration])
+  (:use [wheelcrowd.data.configuration])
   (require [clojure.java.jdbc :as sql]))
 
 (defn get-rating [foursquare-id]
-  (sql/with-connection postgres-db
+  (sql/with-connection (postgres-config)
     (sql/with-query-results results
       [(str "select * from rating where foursquare_id = '" foursquare-id "';")]
       (into [] results))))
 
 (defn new-rating[data]
-  (sql/with-connection postgres-db
+  (sql/with-connection (postgres-config)
     (sql/insert-values :rating [:foursquare_id :name :accessible]
                                [(data :foursquare-id) (data :name) (data :accessible)])))
 
 (defn update-rating
   "This method updates a rating"
   [id attribute-map]
-  (try
-    (sql/with-connection postgres-db
-      (sql/update-values
-        :rating
+  (sql/with-connection (postgres-config)
+    (sql/update-values
+      :rating
         ["foursquare_id=?" id]
-        attribute-map))
-     (catch Exception e (.printStackTrace (.getNextException e)))))
+        attribute-map)))
 
 
 (defn find-or-update-rating[id venue-name accessible]
