@@ -3,7 +3,7 @@
 
 (defn create-accessibility []
   (try
-    (sql/with-connection (System/getenv "DATABASE_URL")
+    (sql/with-connection (postgres-config)
       (sql/create-table :rating
         [:id :serial "PRIMARY KEY"]
         [:foursquare_id :varchar "UNIQUE"]
