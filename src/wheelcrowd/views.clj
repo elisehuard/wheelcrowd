@@ -17,10 +17,11 @@
 
 (defn index-page []
   (layout 
-    [:fieldset
-      [:ol
-        [:a {:class "button" :id "explore"}
-            [:button.native {:name "sync" :type "input"} "Explore"]]]]))
+    [:form {:action "/venues" :method "post" :id "explore"}
+      [:fieldset
+        [:input {:type "text" :name "query"}]]
+      [:fieldset
+        [:input {:type "submit" :value "explore"}]]]))
 
 (defn accessibility[value]
    ({true "yes", false "no", nil "unknown"} value))
