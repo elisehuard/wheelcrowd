@@ -1,4 +1,5 @@
 (ns wheelcrowd.data.migration
+    (:use [wheelcrowd.data.configuration])
     (:require [clojure.java.jdbc :as sql]))
 
 (defn create-accessibility []
