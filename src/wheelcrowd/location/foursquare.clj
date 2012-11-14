@@ -1,6 +1,7 @@
 (ns wheelcrowd.location.foursquare
   (:require [clj-http.client :as client])
-  (:require [clojure.data.json :as json]))
+  (:require [clojure.data.json :as json])
+  (:require [clojure.string :as string]))
 
 (def config
   {:client-id (get (System/getenv) "FOURSQUARE_CLIENT_ID")
@@ -14,13 +15,14 @@
   (let [response (client/get request)]
     (json/read-str (response :body))))
 
-(defn search-request[lat lon foursquare-config]
+(defn search-request[lat lon query foursquare-config]
   (str "https://api.foursquare.com/v2/venues/search?"
        "ll=" lat "," lon "&"
+       (if (string/blank? query) "" (str "query=" query "&"))
        (auth-params foursquare-config)))
 
-(defn search-call[lat lon foursquare-config]
-  (api-call (search-request lat lon foursquare-config)))
+(defn search-call[lat lon query foursquare-config]
+  (api-call (search-request lat lon query foursquare-config)))
 
 (defn get-items[json]
    ((first ((json "response") "groups")) "items"))
@@ -32,9 +34,9 @@
    :categories (map (fn[x] (x "name")) (location-json "categories"))
    :tip-count ((location-json "stats") "tipCount") })
 
-(defn search[lat lon foursquare-config]
+(defn search[lat lon query foursquare-config]
   (sort-by :distance <
-    (map venue-relevant-details (get-items (search-call lat lon foursquare-config)))))
+    (map venue-relevant-details (get-items (search-call lat lon query foursquare-config)))))
 
 (defn tips-request[id config]
   (str "https://api.foursquare.com/v2/venues/" id "/tips?"
