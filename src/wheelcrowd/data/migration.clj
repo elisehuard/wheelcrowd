@@ -3,7 +3,7 @@
     (:require [clojure.java.jdbc :as sql]))
 
 (defn create-accessibility []
-  (sql/with-connection (postgres-config)
+  (sql/with-connection postgres-db
     (sql/create-table :rating
       [:id :serial "PRIMARY KEY"]
       [:foursquare_id :varchar "UNIQUE"]
