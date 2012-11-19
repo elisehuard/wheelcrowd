@@ -23,9 +23,8 @@
 
 (defn index-page []
   (layout 
-    [:form {:action "/venues" :method "post" :id "explore" :class "search-wrapper"}
-      [:input {:type "text" :name "query" :placeholder "near me" :class "search-field"}]
-      [:input {:type "submit" :value "explore" :class "search-button ocean"}]]))
+    [:form {:action "/venues" :id "explore"}
+      [:input {:type "search" :name "query" :placeholder "near me" :id "search-basic"}]]))
 
 (defn accessible-image[value]
    ({true "accessible.png", false "non-accessible.png", nil "unknown.png"} value))
