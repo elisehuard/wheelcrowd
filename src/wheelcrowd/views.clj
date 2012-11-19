@@ -48,19 +48,18 @@
   [:form {:action (str "/venue/" (location :id)) :method "post"}
     [:input {:type "hidden" :name "venue-name" :value (location :name)}]
     [:div {:data-role "fieldcontain"}
-      [:label {:for "accessible-flip"} "Accessibility:"]
+      [:label {:for "accessible-flip"} "Accessible:"]
       [:select {:name "accessible-flip" :id "accessible-flip" :data-role "slider"}
         [:option (attr-selected location true) "Yes"]
         [:option (attr-selected location false) "No"]]]])
 
 (defn show-venue [location]
-  [:div.location
-   [:div {:data-id (location :id) }
-     [:a {:href (str "/venue/" (location :id)) } [:span.name (location :name)]]
-     [:span.accessible [:img {:src (str "/images/" (accessible-image (location :accessible)))}]]
-     [:a {:href (str "https://foursquare.com/v/" (location :id)) } "Foursquare link"]
-     [:div
-       (accessible-slider location)]]])
+  [:div.show-location
+    [:a {:href (str "/venue/" (location :id)) } [:span.name (location :name)]]
+    [:span.accessible [:img {:src (str "/images/" (accessible-image (location :accessible)))}]]
+    [:div
+      (accessible-slider location)]
+    [:a {:class "foursquare" :href (str "https://foursquare.com/v/" (location :id)) } "Foursquare link"]])
 
 (defn venue-page [location]
   (layout (show-venue location))) 

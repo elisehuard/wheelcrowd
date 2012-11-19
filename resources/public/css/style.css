@@ -5,13 +5,26 @@ body {
   text-align: center;
 }
 
-.location a {
+.location, .show-location {
+  padding: 5px;
 }
 
-.location span {
+.location a, .show-location a {
+  text-decoration: none;
 }
 
 .location .accessible {
   display: inline-block
-}  
+}
 
+.show-location .name {
+  font-size: 1.2em;
+}
+.show-location .accessible {
+  padding-left: 10px;
+}
+
+.show-location .foursquare {
+  font-size: 0.8em;
+  text-decoration: underline;
+}
