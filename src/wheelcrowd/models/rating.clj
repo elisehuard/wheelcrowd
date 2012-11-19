@@ -6,10 +6,6 @@
     nil
     (first (data/get-rating id))))
 
-(defn make-accessible[id venue-name]
-  "update venue to make it accessible"
-  (data/find-or-update-rating id venue-name true))
-
-(defn make-inaccessible[id venue-name]
-  "update venue to make it inaccessible"
-  (data/find-or-update-rating id venue-name false))
+(defn update-accessible[id venue-name accessible]
+  "update venue to make it accessible or inaccessible"
+  (data/create-or-update-rating id venue-name accessible))

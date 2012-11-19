@@ -12,6 +12,7 @@
         (include-css "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css")
         (include-js "http://code.jquery.com/jquery-1.8.2.min.js")
         (include-js "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js")
+        (include-js "/js/controls.js")
         (include-js  "/js/geolocation.js")]
       [:body
         [:div {:data-role "page"}
@@ -40,25 +41,28 @@
             (map single-venue locations)]))
 
 
-(defn accessible-button [location]
-  [:form {:action (str "/venue/" (location :id) "/accessible") :method "post"}
-    [:input {:type "hidden" :name "venue-name" :value (location :name)}]
-    [:input {:type "submit" :class "accessible" :value "accessible"}]])
+(defn attr-selected [location value]
+  (if (= value (location :accessible))
+    {:selected "selected" :value (pr-str value)}
+    {:value (pr-str value)}))
 
-(defn not-accessible-button [location]
-  [:form {:action (str "/venue/" (location :id) "/not-accessible") :method "post"}
+(defn accessible-slider [location]
+  [:form {:action (str "/venue/" (location :id)) :method "post"}
     [:input {:type "hidden" :name "venue-name" :value (location :name)}]
-    [:input {:type "submit" :class "not-accessible" :value "not accessible"}]])
+    [:div {:data-role "fieldcontain"}
+      [:label {:for "accessible-flip"} "Accessibility:"]
+      [:select {:name "accessible-flip" :id "accessible-flip" :data-role "slider"}
+        [:option (attr-selected location true) "Yes"]
+        [:option (attr-selected location false) "No"]]]])
 
 (defn show-venue [location]
   [:div.location
    [:div {:data-id (location :id) }
      [:a {:href (str "/venue/" (location :id)) } [:span.name (location :name)]]
-     [:span (str "Accessible: " (accessibility (location :accessible)))]
+     [:span.accessible [:img {:src (str "/images/" (accessible-image (location :accessible)))}]]
      [:a {:href (str "https://foursquare.com/v/" (location :id)) } "Foursquare link"]
      [:div
-       (accessible-button location)
-       (not-accessible-button location)]]])
+       (accessible-slider location)]]])
 
 (defn venue-page [location]
   (layout (show-venue location))) 

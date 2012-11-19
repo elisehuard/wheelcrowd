@@ -15,8 +15,5 @@
 (defn venue [id config]
    (accessible-venue (foursquare/venue id config)))
 
-(defn make-accessible[id venue-name]
-  (rating/make-accessible id venue-name))
-
-(defn make-inaccessible[id venue-name]
-  (rating/make-inaccessible id venue-name))
+(defn update-accessible[id venue-name accessible]
+  (rating/update-accessible id venue-name accessible))
