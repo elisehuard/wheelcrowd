@@ -1,4 +1,5 @@
 (ns wheelcrowd.views
+  (:use [wheelcrowd.helpers])
   (:use [hiccup core page]))
 
 (defn layout [body]
@@ -8,33 +9,35 @@
         [:link {:href "http://fonts.googleapis.com/css?family=Seymour+One" :rel "stylesheet" :type "text/css"}]
         (include-css "/css/reset.css")
         (include-css "/css/style.css")
+        (include-css "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css")
+        (include-js "http://code.jquery.com/jquery-1.8.2.min.js")
+        (include-js "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js")
         (include-js  "/js/geolocation.js")]
       [:body
-        [:div.header
-          [:h1 "Wheelcrowd"]]
-        body
-        [:div.footer "Data from Foursquare"]]))
+        [:div {:data-role "page"}
+          [:div {:data-role "header"}
+            [:h1 "Wheelcrowd"]]
+          [:div {:data-role "content"}
+            body]
+          [:div.footer "Data from Foursquare"]]]))
 
 (defn index-page []
   (layout 
-    [:form {:action "/venues" :method "post" :id "explore"}
-      [:fieldset
-        [:input {:type "text" :name "query"}]]
-      [:fieldset
-        [:input {:type "submit" :value "explore"}]]]))
+    [:form {:action "/venues" :method "post" :id "explore" :class "search-wrapper"}
+      [:input {:type "text" :name "query" :placeholder "near me" :class "search-field"}]
+      [:input {:type "submit" :value "explore" :class "search-button ocean"}]]))
 
-(defn accessibility[value]
-   ({true "yes", false "no", nil "unknown"} value))
+(defn accessible-image[value]
+   ({true "accessible.png", false "non-accessible.png", nil "unknown.png"} value))
 
 (defn single-venue [location]
-  [:div.location
-   [:div {:data-id (location :id) }
-     [:a {:href (str "/venue/" (location :id)) } [:span.name (location :name)]]
-     [:span (str (location :distance) "m")]
-     [:span (str "Accessible: " (accessibility (location :accessible)))]]])
+  [:li.location
+    [:a {:href (str "/venue/" (location :id)) } [:span.name (location :name)]] [:span (str (location :distance) "m")]
+    [:span.accessible [:img {:src (str "/images/" (accessible-image (location :accessible)))}]]])
 
 (defn venues-page [locations]
-  (layout (map single-venue locations)))
+  (layout [:ul {:data-role "listview" :data-inset "true" :data-filter "true"}
+            (map single-venue locations)]))
 
 
 (defn accessible-button [location]
