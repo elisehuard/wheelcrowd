@@ -1,5 +1,4 @@
 (ns wheelcrowd.views
-  (:use [wheelcrowd.helpers])
   (:use [hiccup core page]))
 
 (defn layout [body]
