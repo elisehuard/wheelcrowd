@@ -23,8 +23,12 @@
         attribute-map)))
 
 
-(defn find-or-update-rating[id venue-name accessible]
-  (let [rating (get-rating id)]
+(defn boolerize [string]
+  (boolean (Boolean/valueOf string)))
+
+(defn create-or-update-rating[id venue-name accessible]
+  (let [rating (get-rating id)
+        accessible-bool (boolerize accessible)]
     (if (empty? rating)
-      (new-rating {:foursquare-id id :name venue-name :accessible accessible})
-      (update-rating id {:accessible accessible})))) 
+      (new-rating {:foursquare-id id :name venue-name :accessible accessible-bool})
+      (update-rating id {:accessible accessible-bool})))) 
