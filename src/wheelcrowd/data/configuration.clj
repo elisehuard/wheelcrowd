@@ -2,5 +2,4 @@
   (use wheelcrowd.configuration)
   (require [clojure.java.jdbc :as sql]))
 
-(def postgres-db {:subprotocol "postgresql"
-                  :subname (System/getenv "DATABASE_SUB")})
+(def postgres-db (System/getenv "DATABASE_URL"))
