@@ -6,9 +6,9 @@
     [:head
       [:title "Wheelcrowd"]
         [:link {:href "http://fonts.googleapis.com/css?family=Seymour+One" :rel "stylesheet" :type "text/css"}]
-        (include-css "/css/reset.css")
-        (include-css "/css/style.css")
+        [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
         (include-css "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css")
+        (include-css "/css/style.css")
         (include-js "http://code.jquery.com/jquery-1.8.2.min.js")
         (include-js "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js")
         (include-js "/js/controls.js")
