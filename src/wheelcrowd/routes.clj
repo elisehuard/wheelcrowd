@@ -6,8 +6,17 @@
     (:require [compojure.route :as route]
               [compojure.handler :as handler]
               [compojure.response :as response]
+              [clojure.data.json :as json]
               [wheelcrowd.location.foursquare :as foursquare]
               [wheelcrowd.location :as location]))
+
+(defn- emit-json
+  [type x & [status]]
+  {:headers {"Content-Type"  "application/json" 
+             "Cache-Control" "public, max-age=86400"
+             "Vary"          "Accept-Encoding"}
+   :status (or status 200)
+   :body (json/json-str {type x})})
 
 (defroutes main-routes
              (GET "/" [] (index-page))
@@ -18,7 +27,7 @@
                 (venue-page (location/venue id foursquare/config)))
              (POST "/venue/:id" [id venue-name accessible-flip]
                 (location/update-accessible id venue-name accessible-flip)
-                (redirect (str "/venue/" id)))
+                (emit-json :accessible accessible-flip))
              (route/resources "/")
              (route/not-found "Page not found"))
 
