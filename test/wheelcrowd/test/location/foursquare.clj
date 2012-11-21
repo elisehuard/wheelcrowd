@@ -42,3 +42,14 @@
   (is (= (tips-conclusion [{:created 123 :accessible false},{:created 456 :accessible nil}]) false))
   (is (= (tips-conclusion [{:created 123 :accessible false},{:created 456 :accessible true}]) true)))
 
+(deftest categories-request-test
+  (is (= (categories-request {:client-id "ABC" :client-secret "DEF"})
+         "https://api.foursquare.com/v2/venues/categories?client_id=ABC&client_secret=DEF")))
+
+(deftest category-data-test
+  (testing "retrieves all category data from the data tree"
+   (is (= (category-data {"id" "ABC" "name" "Food" "categories" [{"id" "DEF" "name" "Coffee" "categories" []}]}) [{:id "ABC" :name "Food"}, {:id "DEF", :name "Coffee"}] ))
+   (is (= (category-data {"id" "ABC" "name" "Food" "categories" [{"id" "DEF" "name" "Coffee" "categories" []} {"id" "GHI" "name" "Games" "categories" []}]}) 
+          [{:id "ABC" :name "Food"}, {:id "DEF", :name "Coffee"}, {:id "GHI" :name "Games"}] ))))
+   (is (= (category-data {"id" "ABC" "name" "Food" "categories" [{"id" "DEF" "name" "Coffee" "categories" [{"id" "GHI" "name" "Games" "categories" []}]}]}) 
+          [{:id "ABC" :name "Food"}, {:id "DEF", :name "Coffee"}, {:id "GHI" :name "Games"}] ))

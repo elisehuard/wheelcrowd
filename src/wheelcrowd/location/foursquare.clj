@@ -15,6 +15,8 @@
   (let [response (client/get request)]
     (json/read-str (response :body))))
 
+; search venues
+
 (defn search-request[lat lon query foursquare-config]
   (str "https://api.foursquare.com/v2/venues/search?"
        "ll=" lat "," lon "&"
@@ -37,6 +39,8 @@
 (defn search[lat lon query foursquare-config]
   (sort-by :distance <
     (map venue-relevant-details (get-items (search-call lat lon query foursquare-config)))))
+
+; tips
 
 (defn tips-request[id config]
   (str "https://api.foursquare.com/v2/venues/" id "/tips?"
@@ -67,6 +71,8 @@
 (defn tips-accessible?[id config]
    (tips-conclusion (tips-get-items (tips-call id config))))
 
+; single venue
+
 (defn venue-request[id foursquare-config]
   (str "https://api.foursquare.com/v2/venues/"
        id "?"
@@ -81,3 +87,29 @@
 (defn venue [id config]
   (venue-relevant-details 
     (venue-response (venue-call id config))))
+
+; categories
+
+(defn categories-request[foursquare-config]
+  (str "https://api.foursquare.com/v2/venues/categories?"
+       (auth-params foursquare-config)))
+
+(defn categories-call[foursquare-config]
+  (api-call (categories-request foursquare-config)))
+
+(defn categories-response [json]
+  ((json "response") "categories"))
+
+(defn unspool-category [category]
+  (tree-seq (fn[c] (not (empty? (c "categories"))))
+            (fn[c] (c "categories"))
+            category))
+
+(defn category-data [category]
+  (map (fn[c]
+         {:id (c "id")
+          :name (c "name")})
+       (unspool-category category)))
+
+(defn categories [config]
+  (mapcat category-data (categories-response (categories-call config))))
