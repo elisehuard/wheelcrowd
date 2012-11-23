@@ -28,3 +28,15 @@ body {
   font-size: 0.8em;
   text-decoration: underline;
 }
+
+/* autocomplete */
+.ui-header .ui-btn, .ui-footer .ui-btn {
+  display: block;
+}
+.ui-select a,
+.ui-select a > span
+ {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
