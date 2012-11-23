@@ -5,7 +5,17 @@ wheelcrowd.controls = function() {
     $("#accessible-radio").bind("change", function(event, ui) {
       var form = $(this).closest('form');
       $.post(form.attr('action'), form.serialize(), function(data) {
-        var image = data.accessible == "true" ? "accessible.png" : "non-accessible.png";
+        var image = null;
+        switch (data.accessible) {
+          case "true":
+            image = "accessible.png";
+            break;
+          case "false":
+            image = "non-accessible.png";
+            break;
+          case "nil":
+            image = "unknown.png";
+         }
         $('.accessible img').attr('src', "/images/" + image);
       });
       return false;

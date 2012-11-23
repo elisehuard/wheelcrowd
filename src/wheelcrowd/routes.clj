@@ -25,9 +25,9 @@
                 (venues-page (location/venues lat lon query foursquare/config)))
              (GET "/venue/:id" [id]
                 (venue-page (location/venue id foursquare/config)))
-             (POST "/venue/:id" [id venue-name accessible-flip]
-                (location/update-accessible id venue-name accessible-flip)
-                (emit-json {:accessible accessible-flip}))
+             (POST "/venue/:id" [id venue-name accessible]
+                (location/update-accessible id venue-name accessible)
+                (emit-json {:accessible accessible}))
              (GET "/categories" [term]
                 (emit-json (categories/find-category term foursquare/config)))
              (route/resources "/")
