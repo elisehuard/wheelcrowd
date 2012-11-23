@@ -24,16 +24,16 @@ body {
   font-size: 0.9em;
 }
 
-.location .name, .show-location .name {
+.location .name {
   display: block;
 }
 
 .show-location .name {
   font-size: 1.2em;
-  display: block;
 }
 .show-location .accessible {
   padding-left: 10px;
+  vertical-align: middle;
 }
 
 .show-location .foursquare {

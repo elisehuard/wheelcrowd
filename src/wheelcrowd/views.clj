@@ -45,26 +45,28 @@
             (map single-venue locations)]))
 
 
-(defn attr-selected [location value]
-  (if (= value (location :accessible))
-    {:selected "selected" :value (pr-str value)}
-    {:value (pr-str value)}))
+(defn attr-checked [attrs location value]
+  (if (= (location :accessible) value)
+    (assoc attrs :checked "checked")
+    attrs))
 
-(defn accessible-slider [location]
+(defn accessible-radio [location]
   [:form {:action (str "/venue/" (location :id)) :method "post"}
     [:input {:type "hidden" :name "venue-name" :value (location :name)}]
-    [:div {:data-role "fieldcontain"}
-      [:label {:for "accessible-flip"} "Accessible:"]
-      [:select {:name "accessible-flip" :id "accessible-flip" :data-role "slider"}
-        [:option (attr-selected location true) "Yes"]
-        [:option (attr-selected location false) "No"]]]])
+    [:fieldset {:data-role "controlgroup" :data-type "horizontal" :id "accessible-radio"}
+      [:input (attr-checked {:type "radio" :name "accessible" :id "accessible-nil" :value "nil"} location nil)]
+      [:label {:for "accessible-nil"} "Don't know"]
+      [:input (attr-checked {:type "radio" :name "accessible" :id "accessible-true" :value "true"} location true)]
+      [:label {:for "accessible-true"} "Accessible"]
+      [:input (attr-checked {:type "radio" :name "accessible" :id "accessible-false" :value "false"} location false)]
+      [:label {:for "accessible-false"} "Inaccessible"]]])
 
 (defn show-venue [location]
   [:div.show-location
     [:a {:href (str "/venue/" (location :id)) } [:span.name (location :name)]]
     [:span.accessible [:img {:src (str "/images/" (accessible-image (location :accessible)))}]]
     [:div
-      (accessible-slider location)]
+      (accessible-radio location)]
     [:a {:class "foursquare" :href (str "https://foursquare.com/v/" (location :id)) } "Foursquare link"]])
 
 (defn venue-page [location]

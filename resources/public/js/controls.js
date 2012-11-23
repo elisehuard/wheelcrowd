@@ -2,7 +2,7 @@ var wheelcrowd = wheelcrowd || {};
 wheelcrowd.controls = function() {
 
   var accessibleChange = function() {
-    $("#accessible-flip").bind("change", function(event, ui) {
+    $("#accessible-radio").bind("change", function(event, ui) {
       var form = $(this).closest('form');
       $.post(form.attr('action'), form.serialize(), function(data) {
         var image = data.accessible == "true" ? "accessible.png" : "non-accessible.png";
