@@ -14,11 +14,23 @@ body {
 }
 
 .location .accessible {
-  display: inline-block
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 10px;
+}
+
+.location .details {
+  padding-top: 10px;
+  font-size: 0.9em;
+}
+
+.location .name, .show-location .name {
+  display: block;
 }
 
 .show-location .name {
   font-size: 1.2em;
+  display: block;
 }
 .show-location .accessible {
   padding-left: 10px;
