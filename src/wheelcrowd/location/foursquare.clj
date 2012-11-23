@@ -113,3 +113,7 @@
 
 (defn categories [config]
   (mapcat category-data (categories-response (categories-call config))))
+
+; memoization: should be across all web threads really
+(def categories-memo
+   (memoize categories))

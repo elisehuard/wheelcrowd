@@ -5,5 +5,5 @@
   (filter (fn[x] (not (nil? (re-find (java.util.regex.Pattern/compile (str "(?i)" term ".*")) (x :label))))) collection))
 
 (defn find-category [term config]
-  (filter-on-term term (foursquare/categories foursquare/config)))
+  (filter-on-term term (foursquare/categories-memo foursquare/config)))
 
