@@ -53,7 +53,7 @@
 (defn accessible-radio [location]
   [:form {:action (str "/venue/" (location :id)) :method "post"}
     [:input {:type "hidden" :name "venue-name" :value (location :name)}]
-    [:fieldset {:data-role "controlgroup" :data-type "horizontal" :id "accessible-radio"}
+    [:fieldset {:data-role "controlgroup" :id "accessible-radio"}
       [:input (attr-checked {:type "radio" :name "accessible" :id "accessible-nil" :value "nil"} location nil)]
       [:label {:for "accessible-nil"} "Don't know"]
       [:input (attr-checked {:type "radio" :name "accessible" :id "accessible-true" :value "true"} location true)]
