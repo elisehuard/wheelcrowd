@@ -112,6 +112,7 @@
        (unspool-category category)))
 
 (defn categories [config]
+  (pr "searching categories")
   (mapcat category-data (categories-response (categories-call config))))
 
 ; memoization: should be across all web threads really
