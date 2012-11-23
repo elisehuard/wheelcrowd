@@ -57,9 +57,9 @@
       [:input (attr-checked {:type "radio" :name "accessible" :id "accessible-nil" :value "nil"} location nil)]
       [:label {:for "accessible-nil"} "Don't know"]
       [:input (attr-checked {:type "radio" :name "accessible" :id "accessible-true" :value "true"} location true)]
-      [:label {:for "accessible-true"} "Accessible"]
+      [:label {:for "accessible-true"} "Access"]
       [:input (attr-checked {:type "radio" :name "accessible" :id "accessible-false" :value "false"} location false)]
-      [:label {:for "accessible-false"} "Inaccessible"]]])
+      [:label {:for "accessible-false"} "No Access"]]])
 
 (defn show-venue [location]
   [:div.show-location
