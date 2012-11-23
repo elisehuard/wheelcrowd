@@ -13,11 +13,13 @@ wheelcrowd.controls = function() {
   };
 
   var autocomplete = function() {
+    $(".categories_label").hide();
     $("#search-basic").autocomplete({
       source: "/categories",
       target: $("#suggestions"),
       minLength: 3,
-      link: "/venues?lat=" + $('#lat').attr('value') + "&lon=" + $('#lon').attr('value') + "&categoryId="
+      link: "/venues?lat=" + $('#lat').attr('value') + "&lon=" + $('#lon').attr('value') + "&categoryId=",
+      onLoadingFinished: function() { $(".categories_label").show() }
     });
   };
 

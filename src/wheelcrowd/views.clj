@@ -26,6 +26,7 @@
   (layout 
     [:form {:action "/venues" :id "explore"}
       [:input {:type "search" :name "query" :placeholder "near me" :id "search-basic"}]
+      [:p.categories_label "search on categories:"]
       [:div {:id "suggestions" :data-role "listview" :data-inset "true"}]]))
 
 (defn accessible-image[value]
