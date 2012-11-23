@@ -5,7 +5,7 @@
   (html5
     [:head
       [:title "Wheelcrowd"]
-        [:link {:href "http://fonts.googleapis.com/css?family=Seymour+One" :rel "stylesheet" :type "text/css"}]
+        [:link {:href "http://fonts.googleapis.com/css?family=Montserrat+Alternates|Raleway" :rel "stylesheet" :type "text/css"}]
         [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
         (include-css "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css")
         (include-css "/css/style.css")
@@ -17,7 +17,7 @@
       [:body
         [:div {:data-role "page"}
           [:div {:data-role "header"}
-            [:h1 "Wheelcrowd"]]
+            [:h1 [:a {:href "/"}  "Wheelcrowd"]]]
           [:div {:data-role "content"}
             body]
           [:div.footer "Data from Foursquare"]]]))

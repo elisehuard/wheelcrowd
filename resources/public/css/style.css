@@ -1,6 +1,14 @@
 body {
 }
 
+.ui-bar-a h1 a.ui-link, 
+.ui-bar-a h1 a.ui-link:visited {
+  text-decoration: none;
+  color: white;
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-size: 1.2em;
+}
+
 .footer {
   text-align: center;
 }
