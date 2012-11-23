@@ -11,10 +11,12 @@ wheelcrowd.geoLocation = function() {
   var addLocationInput = function(name, value) {
     var input = document.createElement('input');
     input.setAttribute('name', name);
+    input.setAttribute('id', name);
     input.setAttribute('type', 'hidden');
     input.setAttribute('value', value);
     return input;
-  }
+  };
+
   var getPosition = function(position) {
     var latitude  = position.coords.latitude;
     var longitude = position.coords.longitude;
@@ -25,12 +27,11 @@ wheelcrowd.geoLocation = function() {
       var lonInput = addLocationInput('lon', longitude);
       explore.appendChild(lonInput);
     }
-  }
+    wheelcrowd.controls.autocomplete();
+  };
 
   return {
     locate: locate
   }
 
 }();
-
-wheelcrowd.geoLocation.locate();

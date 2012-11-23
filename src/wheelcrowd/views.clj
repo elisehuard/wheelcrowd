@@ -11,6 +11,7 @@
         (include-css "/css/style.css")
         (include-js "http://code.jquery.com/jquery-1.8.2.min.js")
         (include-js "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js")
+        (include-js "/js/jqm.autoComplete-1.5.0-min.js")
         (include-js "/js/controls.js")
         (include-js  "/js/geolocation.js")]
       [:body
@@ -24,7 +25,8 @@
 (defn index-page []
   (layout 
     [:form {:action "/venues" :id "explore"}
-      [:input {:type "search" :name "query" :placeholder "near me" :id "search-basic"}]]))
+      [:input {:type "search" :name "query" :placeholder "near me" :id "search-basic"}]
+      [:div {:id "suggestions" :data-role "listview" :data-inset "true"}]]))
 
 (defn accessible-image[value]
    ({true "accessible.png", false "non-accessible.png", nil "unknown.png"} value))

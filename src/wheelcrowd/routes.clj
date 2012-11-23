@@ -8,26 +8,28 @@
               [compojure.response :as response]
               [clojure.data.json :as json]
               [wheelcrowd.location.foursquare :as foursquare]
-              [wheelcrowd.location :as location]))
+              [wheelcrowd.location :as location]
+              [wheelcrowd.categories :as categories]))
 
 (defn- emit-json
-  [type x & [status]]
+  [x & [status]]
   {:headers {"Content-Type"  "application/json" 
              "Cache-Control" "public, max-age=86400"
              "Vary"          "Accept-Encoding"}
    :status (or status 200)
-   :body (json/json-str {type x})})
+   :body (json/json-str x)})
 
 (defroutes main-routes
              (GET "/" [] (index-page))
-             (GET "/venues" [lat lon query]
-                  (pr lat lon query)
+             (GET "/venues" [lat lon query category]
                 (venues-page (location/venues lat lon query foursquare/config)))
              (GET "/venue/:id" [id]
                 (venue-page (location/venue id foursquare/config)))
              (POST "/venue/:id" [id venue-name accessible-flip]
                 (location/update-accessible id venue-name accessible-flip)
-                (emit-json :accessible accessible-flip))
+                (emit-json {:accessible accessible-flip}))
+             (GET "/categories" [term]
+                (emit-json (categories/find-category term foursquare/config)))
              (route/resources "/")
              (route/not-found "Page not found"))
 
