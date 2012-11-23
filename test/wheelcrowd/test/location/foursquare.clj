@@ -48,8 +48,8 @@
 
 (deftest category-data-test
   (testing "retrieves all category data from the data tree"
-   (is (= (category-data {"id" "ABC" "name" "Food" "categories" [{"id" "DEF" "name" "Coffee" "categories" []}]}) [{:id "ABC" :name "Food"}, {:id "DEF", :name "Coffee"}] ))
-   (is (= (category-data {"id" "ABC" "name" "Food" "categories" [{"id" "DEF" "name" "Coffee" "categories" []} {"id" "GHI" "name" "Games" "categories" []}]}) 
-          [{:id "ABC" :name "Food"}, {:id "DEF", :name "Coffee"}, {:id "GHI" :name "Games"}] ))))
-   (is (= (category-data {"id" "ABC" "name" "Food" "categories" [{"id" "DEF" "name" "Coffee" "categories" [{"id" "GHI" "name" "Games" "categories" []}]}]}) 
-          [{:id "ABC" :name "Food"}, {:id "DEF", :name "Coffee"}, {:id "GHI" :name "Games"}] ))
+   (is (= (category-data {"id" "ABC" "shortName" "Food" "categories" [{"id" "DEF" "shortName" "Coffee" "categories" []}]}) '({:value "ABC" :label "Food"}, {:value "DEF", :label "Coffee"}) ))
+   (is (= (category-data {"id" "ABC" "shortName" "Food" "categories" [{"id" "DEF" "shortName" "Coffee" "categories" []} {"id" "GHI" "shortName" "Games" "categories" []}]}) 
+          '({:value "ABC" :label "Food"}, {:value "DEF", :label "Coffee"}, {:value "GHI" :label "Games"}) ))))
+   (is (= (category-data {"id" "ABC" "shortName" "Food" "categories" [{"id" "DEF" "shortName" "Coffee" "categories" [{"id" "GHI" "shortName" "Games" "categories" []}]}]}) 
+          '({:value "ABC" :label "Food"}, {:value "DEF", :label "Coffee"}, {:value "GHI" :label "Games"}) ))

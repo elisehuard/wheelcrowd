@@ -107,8 +107,8 @@
 
 (defn category-data [category]
   (map (fn[c]
-         {:id (c "id")
-          :name (c "name")})
+         {:value (c "id")
+          :label (c "shortName")})
        (unspool-category category)))
 
 (defn categories [config]
