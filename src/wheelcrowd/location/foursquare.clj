@@ -119,3 +119,17 @@
 ; memoization: should be across all web threads really
 (def categories-memo
    (memoize categories))
+
+; photo
+(defn photos-request[id config]
+  (str "https://api.foursquare.com/v2/venues/" id "/photos?group=venue&"
+       (auth-params config)))
+
+(defn photos-call[id config]
+  (api-call (photos-request id config)))
+
+(defn photos-response[json]
+  (((json "response") "photos") "items"))
+
+(defn photo[id config]
+  ((first (photos-response (photos-call id config))) "url"))
