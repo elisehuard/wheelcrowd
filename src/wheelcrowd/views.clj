@@ -20,7 +20,9 @@
             [:h1 [:a {:href "/"}  "Wheelcrowd"]]]
           [:div {:data-role "content"}
             body]
-          [:div.footer "Data from Foursquare"]]]))
+          [:div.footer
+             [:img {:src "https://playfoursquare.s3.amazonaws.com/press/logo/poweredByFoursquare_16x16.png" :title "foursquare"}]
+             "Powered by Foursquare"]]]))
 
 (defn index-page []
   (layout 
@@ -41,8 +43,9 @@
         [:span.accessible [:img {:src (str "/images/" (accessible-image (location :accessible)))}]]]]])
 
 (defn venues-page [locations]
-  (layout [:ul {:data-role "listview" :data-inset "true"}
-            (map single-venue locations)]))
+  (layout [:div
+             [:ul {:data-role "listview" :data-inset "true"} (map single-venue locations)]
+             [:a {:href "/" :data-role "button" :data-icon "home"} Home]]))
 
 
 (defn attr-checked [attrs location value]

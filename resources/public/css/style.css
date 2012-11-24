@@ -11,6 +11,11 @@ body {
 
 .footer {
   text-align: center;
+  margin-bottom: 10px;
+}
+.footer img {
+  padding-right: 5px;
+  vertical-align: middle;
 }
 
 .location, .show-location {
@@ -46,7 +51,7 @@ body {
 
 .show-location .foursquare img {
   margin-top: 10px;
-  margin-left: 10px;
+  margin-left: 20px;
   vertical-align: top;
 }
 
