@@ -39,10 +39,15 @@ wheelcrowd.controls = function() {
     });
   };
 
+  var lazyLoading = function() {
+    $('.photo').lazyload({ effect: "fadeIn" });
+  };
+
   return {
     autocomplete: autocomplete,
     accessibleChange: accessibleChange,
-    backButton: backButton
+    backButton: backButton,
+    lazyLoading: lazyLoading
   }
 
 }();
@@ -51,4 +56,5 @@ $(document).bind('pageinit', function() {
   wheelcrowd.geoLocation.locate();
   wheelcrowd.controls.accessibleChange();
   wheelcrowd.controls.backButton();
+  wheelcrowd.controls.lazyLoading();
 });
