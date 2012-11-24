@@ -67,7 +67,8 @@
     [:span.accessible [:img {:src (str "/images/" (accessible-image (location :accessible)))}]]
     [:div
       (accessible-radio location)]
-    [:a {:class "foursquare" :href (str "https://foursquare.com/v/" (location :id)) } "Foursquare link"]])
+    [:a {:class "back" :data-role "button" :data-icon "arrow-l" :data-inline "true"} "Back"]
+    [:a {:class "foursquare" :href (str "https://foursquare.com/v/" (location :id)) } [:img {:src "/images/foursquare-36x36.png"}]]])
 
 (defn venue-page [location]
   (layout (show-venue location))) 

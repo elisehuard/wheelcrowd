@@ -22,6 +22,12 @@ wheelcrowd.controls = function() {
     });
   };
 
+  var backButton = function() {
+    $('.back').click(function() {
+      history.go(-1);
+    });
+  };
+
   var autocomplete = function() {
     $(".categories_label").hide();
     $("#search-basic").autocomplete({
@@ -35,7 +41,8 @@ wheelcrowd.controls = function() {
 
   return {
     autocomplete: autocomplete,
-    accessibleChange: accessibleChange
+    accessibleChange: accessibleChange,
+    backButton: backButton
   }
 
 }();
@@ -43,4 +50,5 @@ wheelcrowd.controls = function() {
 $(document).bind('pageinit', function() {
   wheelcrowd.geoLocation.locate();
   wheelcrowd.controls.accessibleChange();
+  wheelcrowd.controls.backButton();
 });

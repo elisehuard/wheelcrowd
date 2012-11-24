@@ -39,14 +39,15 @@ body {
 .show-location .name {
   font-size: 1.2em;
 }
-.show-location .accessible {
+.show-location .accessible img {
   padding-left: 10px;
   vertical-align: middle;
 }
 
-.show-location .foursquare {
-  font-size: 0.8em;
-  text-decoration: underline;
+.show-location .foursquare img {
+  margin-top: 10px;
+  margin-left: 10px;
+  vertical-align: top;
 }
 
 /* autocomplete */
