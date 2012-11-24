@@ -45,7 +45,7 @@
 (defn venues-page [locations]
   (layout [:div
              [:ul {:data-role "listview" :data-inset "true"} (map single-venue locations)]
-             [:a {:href "/" :data-role "button" :data-icon "home"} Home]]))
+             [:a {:href "/" :data-role "button" :data-icon "home" :data-inline "true"} "Home"]]))
 
 
 (defn attr-checked [attrs location value]
