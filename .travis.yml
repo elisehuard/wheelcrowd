@@ -2,3 +2,4 @@ language: clojure
 services: postgreSQL
 before_script:
   - psql -c 'create database wheelcrowd;' -U postgres
+  - lein trampoline run -m wheelcrowd.data.migration
