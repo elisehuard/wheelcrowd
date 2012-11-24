@@ -29,3 +29,9 @@
         (is (thrown? Exception (accessible-venue {:id "DEF" :tip-count 1}))))
       (with-redefs [foursquare/tips-accessible? (fn[v c] false)]
         (is (thrown? Exception (accessible-venue {:id "GHI" :tip-count 1}))))))))
+
+(deftest photo-venue-test
+  (with-redefs [foursquare/photo (fn[x y] nil)]
+    (is (= (photo-venue {:id "x"}) {:id "x" :photo "/images/missing.png"})))
+  (with-redefs [foursquare/photo (fn[x y] "http://booboo.txt")]
+    (is (= (photo-venue {:id "x"}) {:id "x" :photo "http://booboo.txt"}))))
