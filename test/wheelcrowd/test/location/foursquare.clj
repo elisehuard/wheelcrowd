@@ -4,16 +4,18 @@
   (:use [clojure.test]))
 
 (deftest search-request-test
-  (is (= (search-request 10.0 12.2 nil {:client-id "ABC" :client-secret "DEF"})
+  (is (= (search-request 10.0 12.2 nil nil {:client-id "ABC" :client-secret "DEF"})
          "https://api.foursquare.com/v2/venues/search?ll=10.0,12.2&client_id=ABC&client_secret=DEF"))
-  (is (= (search-request 10.0 12.2 "" {:client-id "ABC" :client-secret "DEF"})
+  (is (= (search-request 10.0 12.2 "" nil {:client-id "ABC" :client-secret "DEF"})
          "https://api.foursquare.com/v2/venues/search?ll=10.0,12.2&client_id=ABC&client_secret=DEF"))
-  (is (= (search-request 10.0 12.2 "food" {:client-id "ABC" :client-secret "DEF"})
-         "https://api.foursquare.com/v2/venues/search?ll=10.0,12.2&query=food&client_id=ABC&client_secret=DEF")))
+  (is (= (search-request 10.0 12.2 "food" nil {:client-id "ABC" :client-secret "DEF"})
+         "https://api.foursquare.com/v2/venues/search?ll=10.0,12.2&query=food&client_id=ABC&client_secret=DEF"))
+  (is (= (search-request 10.0 12.2 nil "category" {:client-id "ABC" :client-secret "DEF"})
+         "https://api.foursquare.com/v2/venues/search?ll=10.0,12.2&categoryId=category&client_id=ABC&client_secret=DEF")))
 
 (deftest search-test
-  (with-redefs [search-call (fn[a b c d] foursquare-response)]
-    (is (= (count (search 51.533599 -0.0937594 "" config)) 30))))
+  (with-redefs [search-call (fn[a b c d e] foursquare-response)]
+    (is (= (count (search 51.533599 -0.0937594 "" "" config)) 30))))
 
 (deftest relevant-details-test
   (let [details (venue-relevant-details single-location)]
