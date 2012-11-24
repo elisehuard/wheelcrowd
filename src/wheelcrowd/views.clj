@@ -41,7 +41,7 @@
         [:span.accessible [:img {:src (str "/images/" (accessible-image (location :accessible)))}]]]]])
 
 (defn venues-page [locations]
-  (layout [:ul {:data-role "listview" :data-inset "true" :data-filter "true"}
+  (layout [:ul {:data-role "listview" :data-inset "true"}
             (map single-venue locations)]))
 
 
