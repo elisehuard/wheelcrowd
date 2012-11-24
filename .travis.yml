@@ -1,4 +1,4 @@
 language: clojure
-services: postgres
+services: postgreSQL
 before_script:
   - psql -c 'create database wheelcrowd;' -U postgres

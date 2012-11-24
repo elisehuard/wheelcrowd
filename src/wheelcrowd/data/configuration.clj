@@ -4,4 +4,4 @@
 
 (def postgres-db 
   (let [postgres-db (System/getenv "DATABASE_URL")]
-    (or postgres-db "postgresql://localhost:5432/wheelcrowd")))
+    (or postgres-db "postgresql://postgres@localhost:5432/wheelcrowd")))
