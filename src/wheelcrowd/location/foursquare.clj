@@ -17,14 +17,15 @@
 
 ; search venues
 
-(defn search-request[lat lon query foursquare-config]
+(defn search-request[lat lon query categoryId foursquare-config]
   (str "https://api.foursquare.com/v2/venues/search?"
        "ll=" lat "," lon "&"
        (if (string/blank? query) "" (str "query=" query "&"))
+       (if (string/blank? categoryId) "" (str "categoryId=" categoryId "&"))
        (auth-params foursquare-config)))
 
-(defn search-call[lat lon query foursquare-config]
-  (api-call (search-request lat lon query foursquare-config)))
+(defn search-call[lat lon query categoryId foursquare-config]
+  (api-call (search-request lat lon query categoryId foursquare-config)))
 
 (defn get-items[json]
    ((first ((json "response") "groups")) "items"))
@@ -36,9 +37,9 @@
    :categories (map (fn[x] (x "name")) (location-json "categories"))
    :tip-count ((location-json "stats") "tipCount") })
 
-(defn search[lat lon query foursquare-config]
+(defn search[lat lon query categoryId foursquare-config]
   (sort-by :distance <
-    (map venue-relevant-details (get-items (search-call lat lon query foursquare-config)))))
+    (map venue-relevant-details (get-items (search-call lat lon query categoryId foursquare-config)))))
 
 ; tips
 

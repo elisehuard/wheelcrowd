@@ -22,8 +22,8 @@
           :else                    (assoc venue :accessible nil))))
 
 ; aggregate venue data and tip information
-(defn venues[lat lon query config]
-   (map accessible-venue (foursquare/search lat lon query config)))
+(defn venues[lat lon query categoryId config]
+   (map accessible-venue (foursquare/search lat lon query categoryId config)))
 
 (defn venue [id config]
    (accessible-venue (foursquare/venue id config)))

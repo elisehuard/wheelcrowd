@@ -21,8 +21,8 @@
 
 (defroutes main-routes
              (GET "/" [] (index-page))
-             (GET "/venues" [lat lon query category]
-                (venues-page (location/venues lat lon query foursquare/config)))
+             (GET "/venues" [lat lon query categoryId]
+                (venues-page (location/venues lat lon query categoryId foursquare/config)))
              (GET "/venue/:id" [id]
                 (venue-page (location/venue id foursquare/config)))
              (POST "/venue/:id" [id venue-name accessible]
