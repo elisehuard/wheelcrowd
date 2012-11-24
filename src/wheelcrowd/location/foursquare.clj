@@ -132,7 +132,7 @@
 (defn photos-response[json]
   (((json "response") "photos") "items"))
 
-(defn photo[sd config]
+(defn photo[id config]
   (let [photo-json (first (photos-response (photos-call id config)))]
     (if (nil? photo-json) 
       nil
