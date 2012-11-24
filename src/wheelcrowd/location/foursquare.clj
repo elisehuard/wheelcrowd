@@ -121,6 +121,7 @@
    (memoize categories))
 
 ; photo
+
 (defn photos-request[id config]
   (str "https://api.foursquare.com/v2/venues/" id "/photos?group=venue&"
        (auth-params config)))
