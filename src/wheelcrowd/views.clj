@@ -36,7 +36,7 @@
 
 (defn single-venue [location]
   [:li.location
-    [:img {:src "/images/coffee.jpg" :class "photo"}]
+    [:img {:src (location :photo) :class "photo"}]
     [:a {:href (str "/venue/" (location :id)) :class "venue"}
       [:span.name (location :name)]
       [:span.distance (str "(" (location :distance) "m)")]
