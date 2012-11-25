@@ -11,7 +11,6 @@
         (include-css "/css/style.css")
         (include-js "http://code.jquery.com/jquery-1.8.2.min.js")
         (include-js "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js")
-        (include-js "/js/jquery.lazyload.min.js")
         (include-js "/js/jqm.autoComplete-1.5.0-min.js")
         (include-js "/js/controls.js")
         (include-js  "/js/geolocation.js")]
@@ -37,7 +36,7 @@
 
 (defn single-venue [location]
   [:li.location
-    [:img {:src "/images/missing.png" :data-original (location :photo) :class "photo"}]
+    [:img {:src (location :photo) :class "photo"}]
     [:a {:href (str "/venue/" (location :id)) :class "venue"}
       [:span.name (location :name)]
       [:span.distance (str "(" (location :distance) "m)")]
