@@ -42,11 +42,12 @@
 
 (defn single-venue [location]
   [:li.location
-    [:img {:src "/images/missing.png" :data-id (location :id) :class "photo"}]
     [:a {:href (str "/venue/" (location :id)) :class "venue"}
-      [:span.name (location :name)]
-      [:span.distance (str "(" (location :distance) "m)")]
-      [:span.accessible [:img {:src (str "/images/" (accessible-image (location :accessible)))}]]]])
+      [:img {:src "/images/missing.png" :data-id (location :id) :class "photo"}]
+      [:div.details
+        [:span.name (location :name)]
+        [:span.distance (str "(" (location :distance) "m)")]
+        [:span.accessible [:img {:src (str "/images/" (accessible-image (location :accessible)))}]]]]])
 
 (defn venues-page [locations]
   (layout [:div

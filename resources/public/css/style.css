@@ -42,6 +42,7 @@ body {
 }
 
 .location .photo {
+  position: static;
   padding: 5px;
   display: inline-block;
   background: white;
@@ -49,11 +50,14 @@ body {
   height: 80px;
   width: 80px;
   border: 1px solid #DDD;
-  margin-top: 5px;
-  margin-left: 5px;
+  margin: 5px 0 5px 5px;
 }
 
-.ui-li.location .ui-btn-inner a.ui-link-inherit {
+.location.ui-li .ui-btn-inner a.ui-link-inherit {
+  padding: 0;
+}
+
+.location .details {
   display: inline-block;
   vertical-align: top;
   padding: .5em 15px;
