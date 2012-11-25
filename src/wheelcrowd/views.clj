@@ -7,6 +7,11 @@
       [:title "Wheelcrowd"]
         [:link {:href "http://fonts.googleapis.com/css?family=Montserrat+Alternates|Raleway" :rel "stylesheet" :type "text/css"}]
         [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
+        [:link {:rel "icon" :href "/images/favicon.png" :type "image/png"}]
+        [:link {:rel "apple-touch-icon" :href "/images/apple-touch-icon-iphone.png"}]
+        [:link {:rel "apple-touch-icon" :sizes "72x72" :href "/images/apple-touch-icon-ipad.png"}]
+        [:link {:rel "apple-touch-icon" :sizes "114x114" :href "/images/apple-touch-icon-iphone4.png"}]
+        [:link {:rel "apple-touch-icon" :sizes "144x144" :href "/images/apple-touch-icon-ipad-retina.png"}]
         (include-css "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css")
         (include-css "/css/style.css")
         (include-js "http://code.jquery.com/jquery-1.8.2.min.js")
