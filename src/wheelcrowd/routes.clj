@@ -28,6 +28,8 @@
              (POST "/venue/:id" [id venue-name accessible]
                 (location/update-accessible id venue-name accessible)
                 (emit-json {:accessible accessible}))
+             (GET "/venue/:id/photo" [id]
+                (emit-json {:photo (foursquare/photo id foursquare/config)}))
              (GET "/categories" [term]
                 (emit-json (categories/find-category term foursquare/config)))
              (route/resources "/")

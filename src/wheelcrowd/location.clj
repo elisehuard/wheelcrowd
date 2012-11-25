@@ -21,18 +21,9 @@
                                        (assoc venue :accessible (foursquare-tip-memo venue)))
           :else                    (assoc venue :accessible nil))))
 
-(defn photo-venue [venue]
-  (let [photo (foursquare/photo (venue :id) foursquare/config)]
-    (if (nil? photo)
-       (assoc venue :photo "/images/missing.png")
-       (assoc venue :photo photo))))
-
-(defn augmented-venue[venue]
-  (photo-venue (accessible-venue venue)))
-
 ; aggregate venue data and tip information
 (defn venues[lat lon query categoryId config]
-   (map augmented-venue (foursquare/search lat lon query categoryId config)))
+   (map accessible-venue (foursquare/search lat lon query categoryId config)))
 
 (defn venue [id config]
    (accessible-venue (foursquare/venue id config)))

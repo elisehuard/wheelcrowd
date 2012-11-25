@@ -21,6 +21,7 @@
           [:div {:data-role "content"}
             body]
           [:div.footer
+             (include-js "/js/images.js")
              [:img {:src "https://playfoursquare.s3.amazonaws.com/press/logo/poweredByFoursquare_16x16.png" :title "foursquare"}]
              "Powered by Foursquare"]]]))
 
@@ -36,7 +37,7 @@
 
 (defn single-venue [location]
   [:li.location
-    [:img {:src (location :photo) :class "photo"}]
+    [:img {:src "/images/missing.png" :data-id (location :id) :class "photo"}]
     [:a {:href (str "/venue/" (location :id)) :class "venue"}
       [:span.name (location :name)]
       [:span.distance (str "(" (location :distance) "m)")]
