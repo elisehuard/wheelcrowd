@@ -16,7 +16,7 @@ wheelcrowd.controls = function() {
           case "nil":
             image = "unknown.png";
          }
-        $('.accessible img').attr('src', "/images/" + image);
+        $('.show-location .accessible img').attr('src', "/images/" + image);
       });
       return false;
     });
