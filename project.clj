@@ -12,5 +12,5 @@
   :plugins [[lein-ring "0.7.5"]
             [ragtime/ragtime.lein "0.3.2"]]
   :ragtime {:migrations ragtime.sql.files/migrations
-            :database (str "jdbc:" (System/getenv "DATABASE_URL"))}
+            :database (str "jdbc:" (clojure.string/replace (System/getenv "DATABASE_URL") #"postgres:" "postgresql:"))}
   :ring {:handler wheelcrowd.routes/app})
