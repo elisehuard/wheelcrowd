@@ -57,6 +57,7 @@
 
 (defn tip-information[tip]
   {:text (tip "text")
+   :user ((tip "user") "id")
    :accessible (tip-accessible (tip "text"))
    :created (tip "createdAt")})
 
@@ -67,7 +68,7 @@
   (let [relevant-tip  (first (sort-by :created > (filter (fn[x] (not (= (x :accessible) nil))) tips)))]
     (if (nil? relevant-tip)
       nil
-      (relevant-tip :accessible))))
+      {:accessible (relevant-tip :accessible) :foursquare-user (relevant-tip :user)})))
 
 (defn tips-accessible?[id config]
    (tips-conclusion (tips-get-items (tips-call id config))))

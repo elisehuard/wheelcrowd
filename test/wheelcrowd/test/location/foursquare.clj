@@ -39,10 +39,10 @@
     (is (= (tips-accessible? "4ace6a86f964a52072d020e3" config) nil))))
 
 (deftest tips-conclusion-test
-  (is (= (tips-conclusion [{:created 123 :accessible true}])  true))
-  (is (= (tips-conclusion [{:created 123 :accessible false}]) false))
-  (is (= (tips-conclusion [{:created 123 :accessible false},{:created 456 :accessible nil}]) false))
-  (is (= (tips-conclusion [{:created 123 :accessible false},{:created 456 :accessible true}]) true)))
+  (is (= (tips-conclusion [{:user "hola" :created 123 :accessible true}])  {:foursquare-user "hola" :accessible true}))
+  (is (= (tips-conclusion [{:created 123 :accessible false :user "boo"}]) {:foursquare-user "boo" :accessible false}))
+  (is (= (tips-conclusion [{:created 123 :accessible false :user "best"},{:created 456 :accessible nil :user "no"}]) {:foursquare-user "best" :accessible false}))
+  (is (= (tips-conclusion [{:created 123 :accessible false :user "bar"},{:created 456 :accessible true :user "baz"}]) {:foursquare-user "baz" :accessible true})))
 
 (deftest categories-request-test
   (is (= (categories-request {:client-id "ABC" :client-secret "DEF"})

@@ -9,16 +9,21 @@
   (memoize foursquare-tip))
 
 ; side-effecting!
-(defn cache-if-tip-present! [accessible venue]
-  (if (not (nil? accessible))
-    (rating/update-accessible (venue :id) (venue :name) accessible)
+(defn cache-if-tip-present! [tip venue]
+  (if (not (nil? tip))
+    (rating/update-accessible (venue :id) (venue :name) (tip :accessible) (tip :foursquare-user))
     nil))
+
+(defn add-tip-accessible [tip venue]
+  (if (nil? tip)
+    (assoc venue :accessible nil)
+    (assoc venue :accessible (tip :accessible))))
 
 (defn accessible-venue[venue]
   (let [rating (rating/retrieve (venue :id))]
     (cond (not (nil? rating))      (assoc venue :accessible (rating :accessible))
           (> (venue :tip-count) 0) (do (cache-if-tip-present! (foursquare-tip-memo venue) venue)
-                                       (assoc venue :accessible (foursquare-tip-memo venue)))
+                                       (add-tip-accessible (foursquare-tip-memo venue) venue))
           :else                    (assoc venue :accessible nil))))
 
 ; aggregate venue data and tip information
