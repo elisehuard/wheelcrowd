@@ -44,6 +44,10 @@
   (is (= (tips-conclusion [{:created 123 :accessible "no" :user "best"},{:created 456 :accessible nil :user "no"}]) {:foursquare-user "best" :accessible "no"}))
   (is (= (tips-conclusion [{:created 123 :accessible "no" :user "bar"},{:created 456 :accessible "yes" :user "baz"}]) {:foursquare-user "baz" :accessible "yes"})))
 
+(deftest tip-information-test
+  (is (= (tip-information {"id" "4fa5a094e4b0fd4c3f2fc248", "createdAt" 1336254612, "text" "Just what a pub should be.", "likes" {"count" 0, "groups" []}, "todo" {"count" 0}, "done" {"count" 1}, "user" {"contact" {}, "lastName" "L.", "gender" "male", "bio" "", "homeCity" "London, UK", "photo" "https://is1.4sqi.net/userpix_thumbs/JJMRY5FBXIAE1ETE.jpg", "tips" {"count" 8}, "id" "3580406","firstName" "Nicolas"}}) 
+         {:text "Just what a pub should be." :user "3580406" :accessible nil :created 1336254612})))
+
 (deftest categories-request-test
   (is (= (categories-request {:client-id "ABC" :client-secret "DEF"})
          "https://api.foursquare.com/v2/venues/categories?client_id=ABC&client_secret=DEF")))
