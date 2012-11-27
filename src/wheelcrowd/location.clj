@@ -21,7 +21,7 @@
 
 (defn accessible-venue[venue]
   (let [rating (rating/retrieve (venue :id))]
-    (cond (not (nil? rating))      (assoc venue :accessible (rating :accessible))
+    (cond (not (nil? rating))      (assoc venue :accessible (rating :wheelchair_accessible))
           (> (venue :tip-count) 0) (do (cache-if-tip-present! (foursquare-tip-memo venue) venue)
                                        (add-tip-accessible (foursquare-tip-memo venue) venue))
           :else                    (assoc venue :accessible nil))))
@@ -34,4 +34,4 @@
    (accessible-venue (foursquare/venue id config)))
 
 (defn update-accessible[id venue-name accessible]
-  (rating/update-accessible id venue-name accessible))
+  (rating/update-accessible id venue-name accessible nil))

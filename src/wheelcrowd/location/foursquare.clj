@@ -51,8 +51,9 @@
   (api-call (tips-request id config)))
 
 (defn tip-accessible[text]
-  (cond (re-find #"(#accessfail|#af)" text) false
-        (re-find #"(#accesspass|#ap)" text) true
+  (cond (re-find #"(#accessfail|#af)" text) "no"
+        (re-find #"(#accesspass|#ap)" text) "yes"
+        (re-find #"(#accesslimited|#al)" text) "limited"
         :else nil))
 
 (defn tip-information[tip]

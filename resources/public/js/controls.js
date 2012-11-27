@@ -7,11 +7,14 @@ wheelcrowd.controls = function() {
       $.post(form.attr('action'), form.serialize(), function(data) {
         var image = null;
         switch (data.accessible) {
-          case "true":
+          case "yes":
             image = "accessible.png";
             break;
-          case "false":
+          case "no":
             image = "non-accessible.png";
+            break;
+          case "limited":
+            image = "limited-accessible.png";
             break;
           case "nil":
             image = "unknown.png";

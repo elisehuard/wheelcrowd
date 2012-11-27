@@ -30,8 +30,8 @@
          "https://api.foursquare.com/v2/venues/ABCDEF/tips?client_id=ABC&client_secret=DEF")))
 
 (deftest tip-accessible-test
-  (is (= (tip-accessible "great place #accesspass") true))
-  (is (= (tip-accessible "boo hiss #accessfail") false))
+  (is (= (tip-accessible "great place #accesspass") "yes"))
+  (is (= (tip-accessible "boo hiss #accessfail") "no"))
   (is (= (tip-accessible "nice coffee, bad service") nil)))
 
 (deftest tips-accessible-test
@@ -39,10 +39,10 @@
     (is (= (tips-accessible? "4ace6a86f964a52072d020e3" config) nil))))
 
 (deftest tips-conclusion-test
-  (is (= (tips-conclusion [{:user "hola" :created 123 :accessible true}])  {:foursquare-user "hola" :accessible true}))
-  (is (= (tips-conclusion [{:created 123 :accessible false :user "boo"}]) {:foursquare-user "boo" :accessible false}))
-  (is (= (tips-conclusion [{:created 123 :accessible false :user "best"},{:created 456 :accessible nil :user "no"}]) {:foursquare-user "best" :accessible false}))
-  (is (= (tips-conclusion [{:created 123 :accessible false :user "bar"},{:created 456 :accessible true :user "baz"}]) {:foursquare-user "baz" :accessible true})))
+  (is (= (tips-conclusion [{:user "hola" :created 123 :accessible "yes"}])  {:foursquare-user "hola" :accessible "yes"}))
+  (is (= (tips-conclusion [{:created 123 :accessible "no" :user "boo"}]) {:foursquare-user "boo" :accessible "no"}))
+  (is (= (tips-conclusion [{:created 123 :accessible "no" :user "best"},{:created 456 :accessible nil :user "no"}]) {:foursquare-user "best" :accessible "no"}))
+  (is (= (tips-conclusion [{:created 123 :accessible "no" :user "bar"},{:created 456 :accessible "yes" :user "baz"}]) {:foursquare-user "baz" :accessible "yes"})))
 
 (deftest categories-request-test
   (is (= (categories-request {:client-id "ABC" :client-secret "DEF"})

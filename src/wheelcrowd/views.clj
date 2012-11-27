@@ -38,7 +38,7 @@
       [:div {:id "suggestions" :data-role "listview" :data-inset "true"}]]))
 
 (defn accessible-image[value]
-   ({true "accessible.png", false "non-accessible.png", nil "unknown.png"} value))
+   ({"yes" "accessible.png", "no" "non-accessible.png", "limited" "limited-accessible.png", nil "unknown.png"} value))
 
 (defn single-venue [location]
   [:li.location
@@ -66,10 +66,12 @@
     [:fieldset {:data-role "controlgroup" :id "accessible-radio"}
       [:input (attr-checked {:type "radio" :name "accessible" :id "accessible-nil" :value "nil"} location nil)]
       [:label {:for "accessible-nil"} "Don't know"]
-      [:input (attr-checked {:type "radio" :name "accessible" :id "accessible-true" :value "true"} location true)]
-      [:label {:for "accessible-true"} "Access"]
-      [:input (attr-checked {:type "radio" :name "accessible" :id "accessible-false" :value "false"} location false)]
-      [:label {:for "accessible-false"} "No Access"]]])
+      [:input (attr-checked {:type "radio" :name "accessible" :id "accessible-yes" :value "yes"} location "yes")]
+      [:label {:for "accessible-yes"} "Access"]
+      [:input (attr-checked {:type "radio" :name "accessible" :id "accessible-limited" :value "limited"} location "limited")]
+      [:label {:for "accessible-limited"} "Limited Access"]
+      [:input (attr-checked {:type "radio" :name "accessible" :id "accessible-no" :value "no"} location "no")]
+      [:label {:for "accessible-no"} "No Access"]]])
 
 (defn show-venue [location]
   [:div.show-location

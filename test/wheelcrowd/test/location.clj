@@ -11,12 +11,12 @@
     (testing "if no data is returned from db"
         (with-redefs [foursquare/tips-accessible? (fn[v c] nil)]
           (is (= (accessible-venue {:tip-count 0}) {:tip-count 0 :accessible nil})))
-        (with-redefs [foursquare/tips-accessible? (fn[v c] {:foursquare-user "foo" :accessible true})]
-          (is (= (accessible-venue {:tip-count 1}) {:tip-count 1 :accessible true})))))
-  (with-redefs [rating/retrieve (fn[v] {:accessible false})]
+        (with-redefs [foursquare/tips-accessible? (fn[v c] {:foursquare-user "foo" :accessible "yes"})]
+          (is (= (accessible-venue {:tip-count 1}) {:tip-count 1 :accessible "yes"})))))
+  (with-redefs [rating/retrieve (fn[v] {:wheelchair_accessible "no"})]
     (testing "if data is returned from db"
-        (with-redefs [foursquare/tips-accessible? (fn[v c] {:foursquare-user "moo" :accessible true})]
-          (is (= (accessible-venue {:tip-count 1}) {:tip-count 1 :accessible false}))))))
+        (with-redefs [foursquare/tips-accessible? (fn[v c] {:foursquare-user "moo" :accessible "yes"})]
+          (is (= (accessible-venue {:tip-count 1}) {:tip-count 1 :accessible "no"}))))))
 
 (deftest accessible-venue-caching-test
   ; making sure we go through the update in some situations
@@ -26,13 +26,13 @@
       (with-redefs [foursquare/tips-accessible? (fn[v c] nil)]
         (is (= (accessible-venue {:id "ABC" :tip-count 1}) {:id "ABC" :tip-count 1 :accessible nil})))
     (testing "if data returned from tip"
-      (with-redefs [foursquare/tips-accessible? (fn[v c] {:foursquare-user "user" :accessible true})]
+      (with-redefs [foursquare/tips-accessible? (fn[v c] {:foursquare-user "user" :accessible "yes"})]
         (is (thrown? Exception (accessible-venue {:id "DEF" :tip-count 1}))))
-      (with-redefs [foursquare/tips-accessible? (fn[v c] {:accessible false :foursquare-user "user2"})]
+      (with-redefs [foursquare/tips-accessible? (fn[v c] {:accessible "no" :foursquare-user "user2"})]
         (is (thrown? Exception (accessible-venue {:id "GHI" :tip-count 1}))))))))
 
 (deftest cache-if-tip-present-test
   (with-redefs [data/create-or-update-rating (fn[a b c d]  d)]
     (is (= (cache-if-tip-present! nil {:id "x"}) nil))
-    (is (= (cache-if-tip-present! {:foursquare-user "user" :accessible true} {:id "y"}) "user"))))
+    (is (= (cache-if-tip-present! {:foursquare-user "user" :accessible "yes"} {:id "y"}) "user"))))
 

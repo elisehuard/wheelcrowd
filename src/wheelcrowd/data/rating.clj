@@ -23,12 +23,8 @@
         attribute-map)))
 
 
-(defn boolerize [string]
-  (boolean (Boolean/valueOf string)))
-
 (defn create-or-update-rating[id venue-name accessible foursquare-user]
-  (let [rating (get-rating id)
-        accessible-bool (boolerize accessible)]
+  (let [rating (get-rating id)]
     (if (empty? rating)
-      (new-rating {:foursquare-id id :name venue-name :accessible accessible-bool :foursquare_user foursquare-user})
-      (update-rating id {:accessible accessible-bool :foursquare_user foursquare-user})))) 
+      (new-rating {:foursquare-id id :name venue-name :wheelchair_accessible accessible :foursquare_user foursquare-user})
+      (update-rating id {:wheelchair_accessible accessible :foursquare_user foursquare-user})))) 
