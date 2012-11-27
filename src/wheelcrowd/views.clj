@@ -18,7 +18,8 @@
         (include-js "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js")
         (include-js "/js/jqm.autoComplete-1.5.0-min.js")
         (include-js "/js/controls.js")
-        (include-js  "/js/geolocation.js")]
+        (include-js  "/js/geolocation.js")
+        (include-js  "/js/google-analytics.js")]
       [:body
         [:div {:data-role "page"}
           [:div {:data-role "header"}
