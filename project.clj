@@ -15,7 +15,7 @@
             :database (str "jdbc:" (or (let [database_host (System/getenv "DATABASE_HOST")
                                              database_user (System/getenv "DATABASE_USER")
                                              database_pass (System/getenv "DATABASE_PASS")]
-                                           (str "postgresql://" database_host 
+                                           (str database_host 
                                                 (if (clojure.string/blank? database_user) "" (str "?user=" database_user))
                                                 (if (clojure.string/blank? database_pass) "" (str "&password=" database_pass))))))}
   :ring {:handler wheelcrowd.routes/app})
