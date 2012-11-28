@@ -42,6 +42,8 @@
                 (emit-json {:photo (foursquare/photo id foursquare/config)}))
              (GET "/categories" [term]
                 (emit-json (categories/find-category term foursquare/config)))
+             (GET "/about" []
+                (about-page))
              (route/resources "/")
              (route/not-found "Page not found"))
 

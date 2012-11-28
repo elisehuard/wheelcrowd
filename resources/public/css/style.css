@@ -9,6 +9,12 @@ body {
   font-size: 1.2em;
 }
 
+.ui-header .ui-btn-left.about {
+  right: 15px;
+  top: 5px;
+  left: auto;
+}
+
 .footer {
   text-align: center;
   margin-bottom: 10px;
