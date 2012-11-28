@@ -1,15 +1,25 @@
 (ns wheelcrowd.routes
     (:use compojure.core
           wheelcrowd.views
+          wheelcrowd.configuration
          [hiccup.middleware :only (wrap-base-url)]
-         [ring.util.response :only (redirect)])
+         [ring.util.response :only (redirect)]
+         clj-airbrake.ring)
     (:require [compojure.route :as route]
               [compojure.handler :as handler]
               [compojure.response :as response]
               [clojure.data.json :as json]
               [wheelcrowd.location.foursquare :as foursquare]
               [wheelcrowd.location :as location]
-              [wheelcrowd.categories :as categories]))
+              [wheelcrowd.categories :as categories]
+              [clj-airbrake.core :as airbrake]))
+
+(airbrake/set-host! "swerve-errbit.herokuapp.com")
+
+(defn wrap-if [handler pred wrapper & args]
+  (if pred
+    (apply wrapper handler args)
+           handler))
 
 (defn- emit-json
   [x & [status]]
@@ -37,4 +47,6 @@
 
 (def app
     (-> (handler/site main-routes)
-            (wrap-base-url)))
+            (wrap-base-url)
+            (wrap-if production?
+               wrap-airbrake (System/getenv "ERRBIT_API_KEY") "production")))
