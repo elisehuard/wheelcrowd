@@ -12,6 +12,7 @@
               [wheelcrowd.location.foursquare :as foursquare]
               [wheelcrowd.location :as location]
               [wheelcrowd.categories :as categories]
+              [wheelcrowd.models.comment :as comments]
               [clj-airbrake.core :as airbrake]))
 
 (airbrake/set-host! "swerve-errbit.herokuapp.com")
@@ -40,6 +41,9 @@
                 (emit-json {:accessible accessible}))
              (GET "/venue/:id/photo" [id]
                 (emit-json {:photo (foursquare/photo id foursquare/config)}))
+             (POST "/venue/:id/comment" [id text]
+                (comments/new-comment id text)
+                (venue-page (location/venue id foursquare/config)))
              (GET "/categories" [term]
                 (emit-json (categories/find-category term foursquare/config)))
              (GET "/about" []

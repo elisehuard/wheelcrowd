@@ -82,12 +82,24 @@
       [:input (attr-checked {:type "radio" :name "accessible" :id "accessible-no" :value "no"} location "no")]
       [:label {:for "accessible-no"} "No Access"]]])
 
+(defn comment-line [comment]
+  [:li (comment :text)])
+
+(defn comment-form [location]
+  [:form {:action (str "/venue/" (location :id) "/comment") :method "post" :class "comment-form"}
+    [:label {:for "text"} "Helpful comment (1 step, upper floor not accessible, side entrance etc.):"]
+    [:textarea {:name "text"}]
+    [:input {:type "submit" :value "add comment" :data-inline "true"}]])
+
 (defn show-venue [location]
   [:div.show-location
     [:a {:href (str "/venue/" (location :id)) } [:span.name (location :name)]]
     [:span.accessible [:img {:src (str "/images/" (accessible-image (location :accessible)))}]]
     [:div
       (accessible-radio location)]
+    (comment-form location)
+    [:ul.comments
+      (map comment-line (location :comments))]
     [:a {:class "back" :data-role "button" :data-icon "arrow-l" :data-inline "true"} "Back"]
     [:a {:class "foursquare" :href (str "https://foursquare.com/v/" (location :id)) } [:img {:src "/images/foursquare-36x36.png"}]]])
 

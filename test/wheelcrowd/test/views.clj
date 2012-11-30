@@ -13,3 +13,6 @@
 (deftest attr-checked-test
    (is (= (attr-checked {:type "radio" :name "accessible" :id "accessible-nil" :value "nil"} {:accessible nil} nil) 
           {:type "radio" :name "accessible" :id "accessible-nil" :value "nil" :checked "checked"})))
+
+(deftest venue-page-test
+  (is (not (nil? (re-find #"flat surface" (venue-page {:id "ABCD" :name "Da Place" :accessible true :comments [{:text "flat surface, all good"},{:text "couldn't be better"}]}))))))
