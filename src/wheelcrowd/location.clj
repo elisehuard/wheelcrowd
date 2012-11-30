@@ -21,7 +21,7 @@
 
 (defn accessible-venue[venue]
   (let [rating (rating/retrieve (venue :id))]
-    (cond (not (nil? rating))      (assoc venue :accessible (rating :wheelchair_accessible))
+    (cond (not (nil? rating))      (assoc venue :accessible (rating :wheelchair_accessible) :comments (rating :comments))
           (> (venue :tip-count) 0) (do (cache-if-tip-present! (foursquare-tip-memo venue) venue)
                                        (add-tip-accessible (foursquare-tip-memo venue) venue))
           :else                    (assoc venue :accessible nil))))
