@@ -16,7 +16,7 @@
   (with-redefs [rating/retrieve (fn[v] {:wheelchair_accessible "no"})]
     (testing "if data is returned from db"
         (with-redefs [foursquare/tips-accessible? (fn[v c] {:foursquare-user "moo" :accessible "yes"})]
-          (is (= (accessible-venue {:tip-count 1}) {:tip-count 1 :accessible "no"}))))))
+          (is (= (accessible-venue {:tip-count 1}) {:tip-count 1 :accessible "no" :comments nil}))))))
 
 (deftest accessible-venue-caching-test
   ; making sure we go through the update in some situations
