@@ -122,3 +122,9 @@ body {
   border: 1px solid #AAA;
   margin-bottom: 5px;
 }
+
+.comments li div {
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 5px;
+}

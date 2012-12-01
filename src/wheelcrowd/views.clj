@@ -83,7 +83,8 @@
       [:label {:for "accessible-no"} "No Access"]]])
 
 (defn comment-line [comment]
-  [:li (comment :text)])
+  [:li (comment :text)
+    [:div (comment :created_at)]])
 
 (defn comment-form [location]
   [:form {:action (str "/venue/" (location :id) "/comment") :method "post" :class "comment-form"}
