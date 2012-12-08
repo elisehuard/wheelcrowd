@@ -1,4 +1,5 @@
 (ns wheelcrowd.location.foursquare
+  (:use [ring.util.codec])
   (:require [clj-http.client :as client])
   (:require [clojure.data.json :as json])
   (:require [clojure.string :as string]))
@@ -20,7 +21,7 @@
 (defn search-request[lat lon query categoryId foursquare-config]
   (str "https://api.foursquare.com/v2/venues/search?"
        "ll=" lat "," lon "&"
-       (if (string/blank? query) "" (str "query=" query "&"))
+       (if (string/blank? query) "" (str "query=" (url-encode query) "&"))
        (if (string/blank? categoryId) "" (str "categoryId=" categoryId "&"))
        (auth-params foursquare-config)))
 
