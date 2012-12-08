@@ -48,14 +48,27 @@
 (defn accessible-image[value]
    ({"yes" "accessible.png", "no" "non-accessible.png", "limited" "limited-accessible.png", nil "unknown.png"} value))
 
+(defn first-comment [location]
+  (let [comment (first (location :comments))]
+    (if (nil? comment)
+      ""
+      (str "\"" (:text comment) "\""))))
+
 (defn single-venue [location]
-  [:li.location
+  [:li
     [:a {:href (str "/venue/" (location :id)) :class "venue"}
       [:img {:src "/images/missing.png" :data-id (location :id) :class "photo"}]
-      [:div.details
-        [:span.name (location :name)]
-        [:span.distance (str "(" (location :distance) "m)")]
-        [:span.accessible [:img {:src (str "/images/" (accessible-image (location :accessible)))}]]]]])
+      [:h1 (location :name)
+        [:span.distance (str " (" (location :distance) "m)")]]
+      [:img.accessible {:src (str "/images/" (accessible-image (location :accessible)))}]
+      [:p (first-comment location)]]])
+      
+;      [:div.details
+;        [:span.name (location :name)]
+;        [:span.distance (str "(" (location :distance) "m)")]
+;        [:div
+;          [:span.accessible [:img {:src (str "/images/" (accessible-image (location :accessible)))}]]
+;          [:div.comment (first-comment location)]]]]])
 
 (defn venues-page [locations]
   (layout [:div

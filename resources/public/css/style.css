@@ -33,9 +33,22 @@ body {
 }
 
 .location .accessible {
-  display: block;
-  padding-top: 10px;
   font-size: 0.9em;
+  vertical-align: middle;
+}
+
+.location .comment {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 0.95em;
+  vertical-align: middle;
+  height: 50px;
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.location .details div {
+  margin-top: 15px;
 }
 
 .location .distance {
@@ -45,6 +58,24 @@ body {
 }
 .location .name {
   font-weight: bold;
+}
+
+.ui-mobile a img.photo {
+  padding: 10px;
+}
+
+.ui-mobile a img.accessible {
+  display: inline-block;
+}
+
+.ui-mobile a p {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.location p.ui-li-desc {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .location .photo {
