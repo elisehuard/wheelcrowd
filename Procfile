@@ -1,1 +1,1 @@
-web: lein ring server-headless $PORT
+web: lein with-profile offline,production trampoline run -m wheelcrowd.core
