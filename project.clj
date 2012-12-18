@@ -19,4 +19,5 @@
                                            (str database_host 
                                                 (if (clojure.string/blank? database_user) "" (str "?user=" database_user))
                                                 (if (clojure.string/blank? database_pass) "" (str "&password=" database_pass))))))}
-  :ring {:handler wheelcrowd.routes/app})
+  :ring {:handler wheelcrowd.routes/app}
+  :min-lein-version "2.0.0")
