@@ -6,6 +6,7 @@ wheelcrowd.geoLocation = function() {
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
+    navigator.geolocation.watchPosition(getPosition); // in case the location changes
   };
 
   var addLocationInput = function(name, value) {
@@ -29,6 +30,7 @@ wheelcrowd.geoLocation = function() {
     }
     wheelcrowd.controls.autocomplete();
   };
+
 
   return {
     locate: locate
