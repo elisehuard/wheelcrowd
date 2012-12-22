@@ -3,6 +3,7 @@
   :dependencies [[org.clojure/clojure "1.3.0"]
                  [org.clojure/data.json "0.2.1"]
                  [org.clojure/java.jdbc "0.2.3"]
+                 [org.clojure/tools.logging "0.2.3"]
                  [postgresql/postgresql "9.1-901.jdbc4"]
                  [ring "1.1.6"]
                  [compojure "1.1.3"]

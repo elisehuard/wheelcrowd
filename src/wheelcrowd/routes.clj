@@ -2,6 +2,7 @@
     (:use compojure.core
           wheelcrowd.views
           wheelcrowd.configuration
+          wheelcrowd.middleware
          [hiccup.middleware :only (wrap-base-url)]
          [ring.util.response :only (redirect)]
          clj-airbrake.ring)
@@ -55,4 +56,6 @@
     (-> (handler/site main-routes)
             (wrap-base-url)
             (wrap-if production?
-               wrap-airbrake (System/getenv "ERRBIT_API_KEY") "production")))
+               wrap-airbrake (System/getenv "ERRBIT_API_KEY") "production")
+            (wrap-request-logging)
+            (wrap-exception-logging)))
